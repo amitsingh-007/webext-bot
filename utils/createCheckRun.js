@@ -1,10 +1,12 @@
 const createCheckRun = async (context) => {
   try {
+    const { payload } = context;
+    const { repository, workflow_run } = payload;
     const response = await context.octokit.checks.create({
-      owner: context.payload.repository.owner.login,
-      repo: context.payload.repository.name,
+      owner: repository.owner.login,
+      repo: repository.name,
       name: "Web Ext",
-      head_sha: context.payload.workflow_run.head_commit.id,
+      head_sha: workflow_run.head_commit.id,
       status: "in_progress",
       started_at: new Date().toISOString(),
       output: {
@@ -12,7 +14,6 @@ const createCheckRun = async (context) => {
         summary: "Waiting...",
       },
     });
-    console.log(response);
     return {
       checkId: response.data.id,
       detailsUrl: response.data.html_url,

@@ -8,7 +8,7 @@ const { getMessage } = require("./utils");
 /**
  * @param {import('probot').Probot} app
  */
-module.exports = (app) => {
+const app = (app) => {
   app.log.info("App started.");
 
   app.on("workflow_run.completed", async (context) => {
@@ -38,7 +38,17 @@ module.exports = (app) => {
         sizeDiff: currentExtSize - latestReleaseExtSize,
       });
     } catch (error) {
-      console.log(error);
+      app.log.info(error);
+    }
+  });
+
+  app.on("push", async (context) => {
+    try {
+      console.log(context.payload);
+    } catch (error) {
+      app.log.info(error);
     }
   });
 };
+
+module.exports = app;

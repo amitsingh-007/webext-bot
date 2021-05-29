@@ -1,6 +1,8 @@
 const commentOnPullRequest = async (context, message) => {
   try {
-    const { pull_requests: pullRequests } = context.payload.workflow_run;
+    const { payload, octokit } = context;
+    const { workflow_run } = payload;
+    const { pull_requests: pullRequests } = workflow_run;
     if (!pullRequests) {
       return;
     }
@@ -9,7 +11,7 @@ const commentOnPullRequest = async (context, message) => {
         body: message,
         issue_number: pullRequest.number,
       });
-      await context.octokit.issues.createComment(params);
+      await octokit.issues.createComment(params);
     });
   } catch (err) {
     console.log(err);

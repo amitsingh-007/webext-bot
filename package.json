@@ -9,18 +9,24 @@
   "keywords": [
     "probot",
     "github",
-    "probot-app"
+    "probot-app",
+    "webext-bot"
   ],
   "scripts": {
+    "netlify:deploy": "netlify build && netlify deploy --prod",
+    "netlify:init": "netlify init",
     "start": "probot run ./index.js",
-    "simulate:workflow_run.completed": "probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./index.js"
+    "simulate:workflow_run.completed": "probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./index.js",
+    "simulate:push": "probot receive -e push -p ./test/fixtures/push.json ./index.js"
   },
   "dependencies": {
+    "@probot/adapter-aws-lambda-serverless": "2.0.1",
     "bytes": "3.1.0",
     "node-fetch": "2.6.1",
     "probot": "11.0.1"
   },
   "devDependencies": {
+    "netlify-cli": "3.31.16",
     "smee-client": "1.2.2"
   },
   "engines": {

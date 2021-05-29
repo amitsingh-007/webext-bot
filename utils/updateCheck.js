@@ -2,13 +2,15 @@ const bytes = require("bytes");
 const { getEmoji } = require("./index");
 
 const updateCheck = async ({ context, check, message, sizeDiff }) => {
+  const { payload } = context;
+  const { repository, workflow_run } = payload;
   try {
     await context.octokit.checks.update({
-      owner: context.payload.repository.owner.login,
-      repo: context.payload.repository.name,
+      owner: repository.owner.login,
+      repo: repository.name,
       check_run_id: check.checkId,
       name: "Web Ext",
-      head_sha: context.payload.workflow_run.head_commit.id,
+      head_sha: workflow_run.head_commit.id,
       status: "completed",
       conclusion: "success",
       completed_at: new Date().toISOString(),
