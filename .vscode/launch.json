@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Probot: Simulate Workflow Run - Completed",
+      "type": "pwa-node",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "simulate:workflow_run.completed"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
+      "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "outputCapture": "std"
+    }
+  ]
+}
