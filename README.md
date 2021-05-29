@@ -1,6 +1,6 @@
 # webext-bot
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that An open-source Github Bot to report extension size change and extension version change on pull requests.
+> A GitHub App built with [Probot](https://github.com/probot/probot) which is an open-source Github Bot to report extension size change and extension version change on pull requests.
 
 ## Setup
 
@@ -12,21 +12,11 @@ npm install
 npm start
 ```
 
-## Docker
-
-```sh
-# 1. Build container
-docker build -t webext-bot .
-
-# 2. Start container
-docker run -e APP_ID=<app-id> -e PRIVATE_KEY=<pem-value> webext-bot
-```
-
 ## Contributing
 
-If you have suggestions for how webext-bot could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
+If you have suggestions for how webext-bot could be improved, or want to report a bug, open an issue!
 
-For more, check out the [Contributing Guide](CONTRIBUTING.md).
+Please check [CONTIBUTING.md](https://github.com/amitsingh-007/webext-bot/blob/main/CONTRIBUTING.md) to get started.
 
 ## License
 
