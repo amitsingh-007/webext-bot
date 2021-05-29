@@ -16,10 +16,10 @@
       "outputCapture": "std"
     },
     {
-      "name": "Probot: Simulate Push",
+      "name": "Probot: Simulate Pull Request - Synchronize",
       "type": "pwa-node",
       "request": "launch",
-      "runtimeArgs": ["run-script", "simulate:push"],
+      "runtimeArgs": ["run-script", "simulate:pull_request.synchronize"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
