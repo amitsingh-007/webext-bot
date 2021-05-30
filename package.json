@@ -17,6 +17,7 @@
     "netlify:init": "netlify init",
     "start": "probot run ./index.js",
     "simulate:workflow_run.completed": "probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./index.js",
+    "simulate:pull_request.opened": "probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./index.js",
     "simulate:pull_request.synchronize": "probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./index.js"
   },
   "dependencies": {

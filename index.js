@@ -1,15 +1,9 @@
-const bytes = require("bytes");
-const semver = require("semver");
-const getCurrentArtifactSize = require("./utils/getCurrentArtifactSize");
-const getLatestReleaseExtensionSize = require("./utils/getLatestReleaseExtensionSize");
-const commentOnPullRequest = require("./utils/commentOnPullRequest");
-const commentOnPullRequests = require("./utils/commentOnPullRequests");
-const createCheckRun = require("./utils/createCheckRun");
-const updateCheck = require("./utils/updateCheck");
-const { getEmoji, getMessage } = require("./utils");
-const getContent = require("./utils/getContent");
-const isValidVersion = require("./utils/isValidVersion");
-const { manifestFilePath, CHECK_NAME } = require("./constants");
+const processPullRequest = require("./logic/pullRequest");
+const {
+  addChecksAndComment,
+  addFailedCheck,
+  createCheck,
+} = require("./logic/checks");
 
 /**
  * @param {import('probot').Probot} app
@@ -24,49 +18,12 @@ const app = (app) => {
         return;
       }
       const { head_commit } = workflow_run;
-      const check = await createCheckRun({
-        context,
-        name: CHECK_NAME,
-        commitId: head_commit.id,
-        checkOutput: {
-          title: "Check is in progress",
-          message: "Waiting...",
-          status: "in_progress",
-        },
-      });
+      const check = await createCheck(context, { headSha: head_commit.id });
       if (workflow_run.conclusion !== "success") {
-        await updateCheck({
-          context,
-          check,
-          checkOutput: {
-            conclusion: "failure",
-            title: "Build faild. Make your CI build succeeds.",
-            message:
-              "Your CI build failed. Please check and make sure it passes. If CI build passes then only this check is executed.",
-          },
-        });
+        await addFailedCheck(context, { check });
         return;
       }
-      const currentExtSize = await getCurrentArtifactSize(context);
-      const latestReleaseExtSize = await getLatestReleaseExtensionSize(context);
-      const sizeDiff = currentExtSize - latestReleaseExtSize;
-      const message = getMessage(
-        currentExtSize,
-        latestReleaseExtSize,
-        head_commit.id
-      );
-      await commentOnPullRequests(context, message);
-      await updateCheck({
-        context,
-        check,
-        checkOutput: {
-          conclusion: "success",
-          title: `Total size difference - ${bytes(sizeDiff)} ${getEmoji(
-            sizeDiff
-          )}`,
-          message,
-        },
-      });
+      await addChecksAndComment(context, { headSha: head_commit.id, check });
     } catch (error) {
       app.log.info(error);
     }
@@ -75,36 +32,25 @@ const app = (app) => {
   app.on("pull_request.synchronize", async (context) => {
     try {
       const { before, after, pull_request } = context.payload;
-      const currentManifest = await getContent({
-        context,
-        path: manifestFilePath,
-        ref: after,
+      await processPullRequest(context, {
+        beforeSha: before,
+        afterSha: after,
+        prNumber: pull_request.number,
       });
-      const latestReleaseManifest = await getContent({
-        context,
-        path: manifestFilePath,
-        ref: before,
+    } catch (error) {
+      context.log.info(error);
+    }
+  });
+
+  app.on("pull_request.opened", async (context) => {
+    try {
+      const { pull_request } = context.payload;
+      const { number, head, base } = pull_request;
+      await processPullRequest(context, {
+        beforeSha: base.sha,
+        afterSha: head.sha,
+        prNumber: number,
       });
-      const oldVersion = latestReleaseManifest.version;
-      const newVersion = currentManifest.version;
-      if (!isValidVersion(oldVersion, newVersion)) {
-        await commentOnPullRequest(
-          context,
-          `
-Please check the extension version in the manifest.
-* New version can't be less than existing version.
-* Check the version format.`,
-          pull_request.number
-        );
-        return;
-      }
-      if (semver.gt(newVersion, oldVersion)) {
-        await commentOnPullRequest(
-          context,
-          `Extension version is updated from \`${oldVersion}\` to \`${newVersion}\``,
-          pull_request.number
-        );
-      }
     } catch (error) {
       context.log.info(error);
     }
