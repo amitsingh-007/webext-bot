@@ -6,7 +6,7 @@
 
 - Create a `.webextrc.json` in the root of the project. Following are the supported field in the config with their default values:
 
-  ```json
+  ```js
   {
     "manifest": {
       //name of the web extension manifest file
