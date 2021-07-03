@@ -4,26 +4,33 @@ const {
   addFailedCheck,
   createCheck,
 } = require("./logic/checks");
+const getConfig = require("./logic/getConfig");
+const shouldSkipWorkflow = require("./logic/validate");
 
 /**
  * @param {import('probot').Probot} app
  */
-const app = (app) => {
+const probotApp = (app) => {
   app.log.info("App started.");
 
   app.on("workflow_run.completed", async (context) => {
     try {
       const { workflow, workflow_run } = context.payload;
-      if (workflow.name !== "CI") {
+      const { head_commit } = workflow_run;
+      const config = await getConfig(context, { sha: head_commit.id });
+      if (shouldSkipWorkflow(workflow, workflow_run, config)) {
         return;
       }
-      const { head_commit } = workflow_run;
       const check = await createCheck(context, { headSha: head_commit.id });
       if (workflow_run.conclusion !== "success") {
         await addFailedCheck(context, { check });
         return;
       }
-      await addChecksAndComment(context, { headSha: head_commit.id, check });
+      await addChecksAndComment(context, {
+        headSha: head_commit.id,
+        check,
+        config,
+      });
     } catch (error) {
       app.log.info(error);
     }
@@ -57,4 +64,4 @@ const app = (app) => {
   });
 };
 
-module.exports = app;
+module.exports = probotApp;

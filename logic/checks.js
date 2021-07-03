@@ -11,12 +11,17 @@ const { CHECK_NAME } = require("../constants");
  * @param {import('probot').Context} context
  */
 const addChecksAndComment = async (context, req) => {
-  const { headSha, check } = req;
-  const currentExtSize = await getCurrentArtifactSize(context);
+  const { headSha, check, config } = req;
+  const currentExtSize = await getCurrentArtifactSize(
+    context,
+    config.workflow.artifact
+  );
   const latestReleaseExtSize = await getLatestReleaseExtensionSize(context);
   const sizeDiff = currentExtSize - latestReleaseExtSize;
   const message = getMessage(currentExtSize, latestReleaseExtSize, headSha);
-  await commentOnPullRequests(context, message);
+  if (sizeDiff >= config.commentThreshold) {
+    await commentOnPullRequests(context, message);
+  }
   await updateCheck({
     context,
     check,
@@ -48,8 +53,8 @@ const addFailedCheck = async (context, req) => {
 /**
  * @param {import('probot').Context} context
  */
-const createCheck = async (context, req) => {
-  return await createCheckRun({
+const createCheck = async (context, req) =>
+  createCheckRun({
     context,
     name: CHECK_NAME,
     commitId: req.headSha,
@@ -59,7 +64,6 @@ const createCheck = async (context, req) => {
       status: "in_progress",
     },
   });
-};
 
 module.exports = {
   addChecksAndComment,
