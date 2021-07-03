@@ -13,21 +13,28 @@
     "webext-bot"
   ],
   "scripts": {
+    "lint": "eslint .",
     "netlify:deploy": "netlify build && netlify deploy --prod",
     "netlify:init": "netlify init",
-    "start": "probot run ./index.js",
     "simulate:workflow_run.completed": "probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./index.js",
     "simulate:pull_request.opened": "probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./index.js",
-    "simulate:pull_request.synchronize": "probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./index.js"
+    "simulate:pull_request.synchronize": "probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./index.js",
+    "start": "probot run ./index.js"
   },
   "dependencies": {
     "@probot/adapter-aws-lambda-serverless": "2.0.1",
     "bytes": "3.1.0",
+    "minimatch": "3.0.4",
     "node-fetch": "2.6.1",
+    "normalize-path": "3.0.0",
     "probot": "11.0.1",
     "semver": "7.3.5"
   },
   "devDependencies": {
+    "eslint": "7.30.0",
+    "eslint-import-resolver-node": "0.3.4",
+    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-node": "11.1.0",
     "netlify-cli": "3.31.16",
     "smee-client": "1.2.2"
   },

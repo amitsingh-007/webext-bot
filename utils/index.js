@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 const bytes = require("bytes");
 
 const byteOptions = {
@@ -26,7 +27,7 @@ ${tableRows
     const texts = row.values.map(({ text, noHighlight }) =>
       noHighlight ? text : `\`${text}\``
     );
-    return `| **${row.title}** | ${texts.join(` \\| `)} |`;
+    return `| **${row.title}** | ${texts.join(" \\| ")} |`;
   })
   .join("\n")}
 ---

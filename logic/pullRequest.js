@@ -1,8 +1,9 @@
 const semver = require("semver");
-const { manifestFilePath } = require("../constants");
+const { getManifestPath } = require("../utils/pathUtils");
 const commentOnPullRequest = require("../utils/commentOnPullRequest");
 const getContent = require("../utils/getContent");
 const isValidVersion = require("../utils/isValidVersion");
+const getConfig = require("./getConfig");
 
 const failMessage = `
 Please check the extension version in the manifest.
@@ -14,6 +15,8 @@ Please check the extension version in the manifest.
  */
 const processPullRequest = async (context, req) => {
   const { afterSha, beforeSha, prNumber } = req;
+  const config = await getConfig(context, { sha: afterSha });
+  const manifestFilePath = getManifestPath(config);
   const currentManifest = await getContent({
     context,
     path: manifestFilePath,

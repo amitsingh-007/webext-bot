@@ -2,6 +2,19 @@
 
 To start the developement for the first time, execute `npm start` and follow the steps [here](https://probot.github.io/docs/development/#running-the-app-locally). This should generate a `.env` file containing sensitive information.
 
+## Setup
+
+```sh
+# Install dependencies
+npm install
+
+# Run the bot
+npm start
+
+# Deploy the bot
+npm run netlify:deploy
+```
+
 To simulate Github Webhooks on local/dev environment, please look at [this](https://probot.github.io/docs/simulating-webhooks/).
 
 1. Visit [Bot Settings Page -> Advanced](https://github.com/settings/apps/webext-bot/advanced).
