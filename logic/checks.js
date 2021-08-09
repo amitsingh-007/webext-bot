@@ -17,7 +17,7 @@ const addChecksAndComment = async (context, req) => {
     config.workflow.artifact
   );
   const latestReleaseExtSize = await getLatestReleaseExtensionSize(context);
-  const sizeDiff = currentExtSize - latestReleaseExtSize;
+  const sizeDiff = Math.abs(currentExtSize - latestReleaseExtSize);
   const message = getMessage(currentExtSize, latestReleaseExtSize, headSha);
   if (sizeDiff >= config.commentThreshold) {
     await commentOnPullRequests(context, message);
