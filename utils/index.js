@@ -35,7 +35,7 @@ ${tableRows
 
 const getMessage = (currentSize, latestReleaseSize, commitId) => {
   const sizeDiff = currentSize - latestReleaseSize;
-  const percentChange = sizeDiff / latestReleaseSize;
+  const percentChange = (sizeDiff / latestReleaseSize) * 100;
   const tableRows = [
     {
       title: "Commit",

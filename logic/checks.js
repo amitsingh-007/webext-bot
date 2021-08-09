@@ -17,9 +17,10 @@ const addChecksAndComment = async (context, req) => {
     config.workflow.artifact
   );
   const latestReleaseExtSize = await getLatestReleaseExtensionSize(context);
-  const sizeDiff = Math.abs(currentExtSize - latestReleaseExtSize);
+  const actualSizeDiff = currentExtSize - latestReleaseExtSize;
+  const absoluteSizeDiff = Math.abs(actualSizeDiff);
   const message = getMessage(currentExtSize, latestReleaseExtSize, headSha);
-  if (sizeDiff >= config.commentThreshold) {
+  if (absoluteSizeDiff >= config.commentThreshold) {
     await commentOnPullRequests(context, message);
   }
   await updateCheck({
@@ -27,7 +28,9 @@ const addChecksAndComment = async (context, req) => {
     check,
     checkOutput: {
       conclusion: "success",
-      title: `Total size difference - ${bytes(sizeDiff)} ${getEmoji(sizeDiff)}`,
+      title: `Total size difference: ${bytes(absoluteSizeDiff)} ${getEmoji(
+        actualSizeDiff
+      )}`,
       message,
     },
   });
