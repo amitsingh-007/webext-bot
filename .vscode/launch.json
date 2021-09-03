@@ -42,6 +42,20 @@
         "!**/node_modules/**"
       ],
       "outputCapture": "std"
+    },
+    {
+      "name": "Probot: Simulate Issues - Opened",
+      "type": "pwa-node",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "simulate:issues.opened"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
+      "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "outputCapture": "std"
     }
   ]
 }

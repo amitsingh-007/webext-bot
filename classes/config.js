@@ -8,11 +8,13 @@ class Config {
       workflow,
       branchesIgnore = [],
       commentThreshold = 0,
+      autoAssign,
     } = config || {};
     this.manifest = new Manifest(manifest);
     this.workflow = new Workflow(workflow);
     this.branchesIgnore = branchesIgnore;
     this.commentThreshold = commentThreshold;
+    this.autoAssign = autoAssign;
   }
 }
 

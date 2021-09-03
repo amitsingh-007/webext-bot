@@ -23,7 +23,9 @@
     //these branches wont be processed. Takes array of glob patterns. Eg. ["dependabot/**"]
     "branchesIgnore": [""],
     //minimum size change to allow a comment on the pull request
-    "commentThreshold": 0
+    "commentThreshold": 0,
+    //auto assign the list of users on opening every new PR and issue
+    "autoAssign": ["xyz-github-username"]
   }
   ```
 

@@ -4,12 +4,11 @@ const getContent = require("../utils/getContent");
 /**
  * @param {import('probot').Context} context
  */
-const getConfig = async (context, req) => {
-  const { sha } = req;
+const getConfig = async (context, req = {}) => {
   const response = await getContent({
     context,
     path: ".webextrc.json",
-    ref: sha,
+    ref: req.sha,
   });
   return new Config(response);
 };

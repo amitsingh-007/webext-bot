@@ -6,6 +6,7 @@ const {
 } = require("./logic/checks");
 const getConfig = require("./logic/getConfig");
 const shouldSkipWorkflow = require("./logic/validate");
+const addAssignees = require("./utils/addAssignees");
 
 /**
  * @param {import('probot').Probot} app
@@ -53,13 +54,30 @@ const probotApp = (app) => {
     try {
       const { pull_request } = context.payload;
       const { number, head, base } = pull_request;
+      const config = await getConfig(context, { sha: head.sha });
       await processPullRequest(context, {
         beforeSha: base.sha,
         afterSha: head.sha,
         prNumber: number,
       });
+      await addAssignees(context, {
+        config,
+        number,
+      });
     } catch (error) {
       context.log.info(error);
+    }
+  });
+
+  app.on("issues.opened", async (context) => {
+    try {
+      const config = await getConfig(context);
+      await addAssignees(context, {
+        config,
+        number: context.payload.issue.number,
+      });
+    } catch (error) {
+      context.log.error(error);
     }
   });
 };
