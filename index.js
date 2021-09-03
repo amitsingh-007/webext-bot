@@ -5,7 +5,7 @@ const {
   createCheck,
 } = require("./logic/checks");
 const getConfig = require("./logic/getConfig");
-const shouldSkipWorkflow = require("./logic/validate");
+const { shouldSkipWorkflow, shouldIgnoreBranch } = require("./logic/validate");
 const addAssignees = require("./utils/addAssignees");
 
 /**
@@ -60,10 +60,12 @@ const probotApp = (app) => {
         afterSha: head.sha,
         prNumber: number,
       });
-      await addAssignees(context, {
-        config,
-        number,
-      });
+      if (!shouldIgnoreBranch(config, head.ref)) {
+        await addAssignees(context, {
+          config,
+          number,
+        });
+      }
     } catch (error) {
       context.log.info(error);
     }
