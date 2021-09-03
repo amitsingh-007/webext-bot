@@ -7,7 +7,7 @@ const getContent = require("../utils/getContent");
 const getConfig = async (context, req = {}) => {
   const response = await getContent({
     context,
-    path: ".webextrc.json",
+    path: ".github/webext.yml",
     ref: req.sha,
   });
   return new Config(response);

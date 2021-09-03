@@ -29,7 +29,8 @@
     "node-fetch": "2.6.1",
     "normalize-path": "3.0.0",
     "probot": "12.1.1",
-    "semver": "7.3.5"
+    "semver": "7.3.5",
+    "yaml": "1.10.2"
   },
   "devDependencies": {
     "eslint": "7.32.0",
