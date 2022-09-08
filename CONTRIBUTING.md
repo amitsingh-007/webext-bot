@@ -8,11 +8,14 @@ To start the developement for the first time, execute `npm start` and follow the
 # Install dependencies
 npm install
 
+# Login to vercel
+npm run vercel:login
+
 # Run the bot
 npm start
 
 # Deploy the bot
-npm run netlify:deploy
+npm run vercel:deploy OR it is automatically deployed on push to main `branch`
 ```
 
 To simulate Github Webhooks on local/dev environment, please look at [this](https://probot.github.io/docs/simulating-webhooks/).

@@ -1,8 +1,0 @@
-[build]
-    command = "npm install --production"
-    functions = "./functions"
-    publish = "."
-
-[functions]
-    directory = "functions/"
-
