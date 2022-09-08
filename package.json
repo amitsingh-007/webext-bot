@@ -21,12 +21,13 @@
     "start": "probot run ./index.js",
     "vercel:build": "vercel build",
     "vercel:deploy": "vercel --prod",
+    "vercel:env": "vercel env pull .env",
     "vercel:login": "vercel login"
   },
   "dependencies": {
+    "axios": "0.27.2",
     "bytes": "3.1.2",
     "minimatch": "5.1.0",
-    "node-fetch": "3.2.10",
     "normalize-path": "3.0.0",
     "probot": "12.2.8",
     "semver": "7.3.7",
