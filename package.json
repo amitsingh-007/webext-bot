@@ -14,16 +14,16 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "netlify:deploy": "netlify build && netlify deploy --prod",
-    "netlify:init": "netlify init",
     "simulate:issues.opened": "probot receive -e issues -p ./test/fixtures/issues.opened.json ./index.js",
     "simulate:pull_request.opened": "probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./index.js",
     "simulate:pull_request.synchronize": "probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./index.js",
     "simulate:workflow_run.completed": "probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./index.js",
-    "start": "probot run ./index.js"
+    "start": "probot run ./index.js",
+    "vercel:build": "vercel build",
+    "vercel:deploy": "vercel --prod",
+    "vercel:login": "vercel login"
   },
   "dependencies": {
-    "@probot/adapter-aws-lambda-serverless": "2.0.2",
     "bytes": "3.1.0",
     "minimatch": "3.0.4",
     "node-fetch": "2.6.1",
@@ -37,10 +37,10 @@
     "eslint-import-resolver-node": "0.3.6",
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-node": "11.1.0",
-    "netlify-cli": "6.8.5",
-    "smee-client": "1.2.2"
+    "smee-client": "1.2.2",
+    "vercel": "28.2.3"
   },
   "engines": {
-    "node": ">= 10.13.0"
+    "node": ">= 14"
   }
 }
