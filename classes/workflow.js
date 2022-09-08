@@ -6,4 +6,4 @@ class Workflow {
   }
 }
 
-module.exports = Workflow;
+export default Workflow;

@@ -1,4 +1,4 @@
-const commentOnPullRequest = require("./commentOnPullRequest");
+import commentOnPullRequest from "./commentOnPullRequest";
 
 /**
  * @param {import('probot').Context} context
@@ -18,4 +18,4 @@ const commentOnPullRequests = async (context, message) => {
   }
 };
 
-module.exports = commentOnPullRequests;
+export default commentOnPullRequests;

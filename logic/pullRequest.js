@@ -1,9 +1,9 @@
-const semver = require("semver");
-const { getManifestPath } = require("../utils/pathUtils");
-const commentOnPullRequest = require("../utils/commentOnPullRequest");
-const getContent = require("../utils/getContent");
-const isValidVersion = require("../utils/isValidVersion");
-const getConfig = require("./getConfig");
+import { gt } from "semver";
+import { getManifestPath } from "../utils/pathUtils";
+import commentOnPullRequest from "../utils/commentOnPullRequest";
+import getContent from "../utils/getContent";
+import isValidVersion from "../utils/isValidVersion";
+import getConfig from "./getConfig";
 
 const failMessage = `
 Please check the extension version in the manifest.
@@ -33,7 +33,7 @@ const processPullRequest = async (context, req) => {
     await commentOnPullRequest(context, failMessage, prNumber);
     return;
   }
-  if (semver.gt(newVersion, oldVersion)) {
+  if (gt(newVersion, oldVersion)) {
     await commentOnPullRequest(
       context,
       `Extension version is updated from \`${oldVersion}\` to \`${newVersion}\``,
@@ -42,4 +42,4 @@ const processPullRequest = async (context, req) => {
   }
 };
 
-module.exports = processPullRequest;
+export default processPullRequest;

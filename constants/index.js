@@ -1,5 +1,1 @@
-const CHECK_NAME = "Web Ext";
-
-module.exports = {
-  CHECK_NAME,
-};
+export const CHECK_NAME = "Web Ext";

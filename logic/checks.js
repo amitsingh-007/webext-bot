@@ -1,16 +1,16 @@
-const bytes = require("bytes");
-const commentOnPullRequests = require("../utils/commentOnPullRequests");
-const createCheckRun = require("../utils/createCheckRun");
-const getCurrentArtifactSize = require("../utils/getCurrentArtifactSize");
-const getLatestReleaseExtensionSize = require("../utils/getLatestReleaseExtensionSize");
-const { getMessage, getEmoji } = require("../utils/index");
-const updateCheck = require("../utils/updateCheck");
-const { CHECK_NAME } = require("../constants");
+import bytes from "bytes";
+import commentOnPullRequests from "../utils/commentOnPullRequests";
+import createCheckRun from "../utils/createCheckRun";
+import getCurrentArtifactSize from "../utils/getCurrentArtifactSize";
+import getLatestReleaseExtensionSize from "../utils/getLatestReleaseExtensionSize";
+import { getMessage, getEmoji } from "../utils/index";
+import updateCheck from "../utils/updateCheck";
+import { CHECK_NAME } from "../constants";
 
 /**
  * @param {import('probot').Context} context
  */
-const addChecksAndComment = async (context, req) => {
+export const addChecksAndComment = async (context, req) => {
   const { headSha, check, config } = req;
   const currentExtSize = await getCurrentArtifactSize(
     context,
@@ -39,7 +39,7 @@ const addChecksAndComment = async (context, req) => {
 /**
  * @param {import('probot').Context} context
  */
-const addFailedCheck = async (context, req) => {
+export const addFailedCheck = async (context, req) => {
   const { check } = req;
   await updateCheck({
     context,
@@ -56,7 +56,7 @@ const addFailedCheck = async (context, req) => {
 /**
  * @param {import('probot').Context} context
  */
-const createCheck = async (context, req) =>
+export const createCheck = async (context, req) =>
   createCheckRun({
     context,
     name: CHECK_NAME,
@@ -67,9 +67,3 @@ const createCheck = async (context, req) =>
       status: "in_progress",
     },
   });
-
-module.exports = {
-  addChecksAndComment,
-  addFailedCheck,
-  createCheck,
-};

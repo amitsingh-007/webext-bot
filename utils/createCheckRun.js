@@ -24,4 +24,4 @@ const createCheckRun = async ({ context, name, commitId, checkOutput }) => {
   }
 };
 
-module.exports = createCheckRun;
+export default createCheckRun;

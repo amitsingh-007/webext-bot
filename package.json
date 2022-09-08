@@ -12,6 +12,7 @@
     "probot-app",
     "webext-bot"
   ],
+  "type": "module",
   "scripts": {
     "lint": "eslint .",
     "simulate:issues.opened": "probot receive -e issues -p ./test/fixtures/issues.opened.json ./index.js",

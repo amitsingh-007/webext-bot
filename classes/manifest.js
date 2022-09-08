@@ -6,4 +6,4 @@ class Manifest {
   }
 }
 
-module.exports = Manifest;
+export default Manifest;

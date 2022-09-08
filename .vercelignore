@@ -1,2 +1,8 @@
 test/
 **/node_modules/
+.vscode
+.eslintrc.js
+CONTRIBUTING.md
+jsconfig.json
+README.md
+PRIVACY_POLICY.md

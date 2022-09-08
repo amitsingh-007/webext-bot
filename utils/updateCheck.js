@@ -1,4 +1,4 @@
-const { CHECK_NAME } = require("../constants");
+import { CHECK_NAME } from "../constants";
 
 const updateCheck = async ({ context, check, checkOutput }) => {
   const { payload } = context;
@@ -24,4 +24,4 @@ const updateCheck = async ({ context, check, checkOutput }) => {
   }
 };
 
-module.exports = updateCheck;
+export default updateCheck;

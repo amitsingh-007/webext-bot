@@ -13,4 +13,4 @@ const commentOnPullRequest = async (context, message, prNumber) => {
   }
 };
 
-module.exports = commentOnPullRequest;
+export default commentOnPullRequest;

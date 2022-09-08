@@ -1,6 +1,6 @@
-const semver = require("semver");
+import { valid, gte } from "semver";
 
 const isValidVersion = (oldVersion, newVersion) =>
-  semver.valid(newVersion) && semver.gte(newVersion, oldVersion);
+  valid(newVersion) && gte(newVersion, oldVersion);
 
-module.exports = isValidVersion;
+export default isValidVersion;

@@ -1,12 +1,12 @@
-const processPullRequest = require("./logic/pullRequest");
-const {
+import processPullRequest from "./logic/pullRequest";
+import {
   addChecksAndComment,
   addFailedCheck,
   createCheck,
-} = require("./logic/checks");
-const getConfig = require("./logic/getConfig");
-const { shouldSkipWorkflow, shouldIgnoreBranch } = require("./logic/validate");
-const addAssignees = require("./utils/addAssignees");
+} from "./logic/checks";
+import getConfig from "./logic/getConfig";
+import { shouldSkipWorkflow, shouldIgnoreBranch } from "./logic/validate";
+import addAssignees from "./utils/addAssignees";
 
 /**
  * @param {import('probot').Probot} app
@@ -84,4 +84,4 @@ const probotApp = (app) => {
   });
 };
 
-module.exports = probotApp;
+export default probotApp;

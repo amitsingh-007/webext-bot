@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-const bytes = require("bytes");
+import bytes from "bytes";
 
 const byteOptions = {
   decimalPlaces: 2,
@@ -8,7 +8,7 @@ const byteOptions = {
 
 const COMMENT_HEADING = "Web Extension Change Summary";
 
-const getEmoji = (sizeDiff) => {
+export const getEmoji = (sizeDiff) => {
   if (sizeDiff > 0) {
     return "🔼";
   }
@@ -33,7 +33,7 @@ ${tableRows
 ---
 **${footerText}**`;
 
-const getMessage = (currentSize, latestReleaseSize, commitId) => {
+export const getMessage = (currentSize, latestReleaseSize, commitId) => {
   const sizeDiff = currentSize - latestReleaseSize;
   const percentChange = (sizeDiff / latestReleaseSize) * 100;
   const tableRows = [
@@ -75,9 +75,4 @@ const getMessage = (currentSize, latestReleaseSize, commitId) => {
       ? "There is a significant size increase in this commit.🤔"
       : "This commit looks good. Cheers 🙌";
   return getMarkdownTable({ heading: COMMENT_HEADING, tableRows, footerText });
-};
-
-module.exports = {
-  getEmoji,
-  getMessage,
 };

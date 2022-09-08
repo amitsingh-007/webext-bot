@@ -1,14 +1,10 @@
-const path = require("path");
-const normalize = require("normalize-path");
+import normalize from "normalize-path";
+import path from "path";
 
 /**
  * @param {import('../classes/config') config
  */
-const getManifestPath = (config) => {
+export const getManifestPath = (config) => {
   const { manifest } = config;
   return normalize(path.normalize(path.join(manifest.dir, manifest.name)));
-};
-
-module.exports = {
-  getManifestPath,
 };

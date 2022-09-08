@@ -14,4 +14,4 @@ const getLatestReleaseExtensionSize = async (context) => {
   }
 };
 
-module.exports = getLatestReleaseExtensionSize;
+export default getLatestReleaseExtensionSize;

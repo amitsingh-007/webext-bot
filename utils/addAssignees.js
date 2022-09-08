@@ -14,4 +14,4 @@ const addAssignees = async (context, req) => {
   }
 };
 
-module.exports = addAssignees;
+export default addAssignees;

@@ -1,5 +1,5 @@
-const Config = require("../classes/config");
-const getContent = require("../utils/getContent");
+import Config from "../classes/config";
+import getContent from "../utils/getContent";
 
 /**
  * @param {import('probot').Context} context
@@ -13,4 +13,4 @@ const getConfig = async (context, req = {}) => {
   return new Config(response);
 };
 
-module.exports = getConfig;
+export default getConfig;

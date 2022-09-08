@@ -1,5 +1,5 @@
-const Manifest = require("./manifest");
-const Workflow = require("./workflow");
+import Manifest from "./manifest";
+import Workflow from "./workflow";
 
 class Config {
   constructor(config = {}) {
@@ -12,4 +12,4 @@ class Config {
   }
 }
 
-module.exports = Config;
+export default Config;

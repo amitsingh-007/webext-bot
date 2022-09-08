@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
 const getCurrentArtifactSize = async (context, artifactName) => {
   try {
@@ -14,4 +14,4 @@ const getCurrentArtifactSize = async (context, artifactName) => {
   }
 };
 
-module.exports = getCurrentArtifactSize;
+export default getCurrentArtifactSize;
