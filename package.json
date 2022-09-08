@@ -24,20 +24,20 @@
     "vercel:login": "vercel login"
   },
   "dependencies": {
-    "bytes": "3.1.0",
-    "minimatch": "3.0.4",
-    "node-fetch": "2.6.1",
+    "bytes": "3.1.2",
+    "minimatch": "5.1.0",
+    "node-fetch": "3.2.10",
     "normalize-path": "3.0.0",
-    "probot": "12.1.1",
-    "semver": "7.3.5",
-    "yaml": "1.10.2"
+    "probot": "12.2.8",
+    "semver": "7.3.7",
+    "yaml": "2.1.1"
   },
   "devDependencies": {
-    "eslint": "7.32.0",
+    "eslint": "8.23.0",
     "eslint-import-resolver-node": "0.3.6",
-    "eslint-plugin-import": "2.24.2",
+    "eslint-plugin-import": "2.26.0",
     "eslint-plugin-node": "11.1.0",
-    "smee-client": "1.2.2",
+    "smee-client": "1.2.3",
     "vercel": "28.2.3"
   },
   "engines": {
