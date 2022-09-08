@@ -11,6 +11,9 @@ npm install
 # Login to vercel
 npm run vercel:login
 
+# Pull vercel env variables
+npm run vercel:env
+
 # Run the bot
 npm start
 
