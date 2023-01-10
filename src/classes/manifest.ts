@@ -1,9 +1,12 @@
 class Manifest {
-  constructor(manifest) {
+  name: any;
+  dir: any;
+
+  constructor(manifest: any) {
     const { name = "manifest.json", dir = "./" } = manifest || {};
     this.name = name;
     this.dir = dir;
   }
 }
 
-module.exports = Manifest;
+export default Manifest;

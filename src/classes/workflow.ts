@@ -1,9 +1,12 @@
 class Workflow {
-  constructor(workflow) {
+  name: any;
+  artifact: any;
+
+  constructor(workflow: any) {
     const { name = "CI", artifact = "extension" } = workflow || {};
     this.name = name;
     this.artifact = artifact;
   }
 }
 
-module.exports = Workflow;
+export default Workflow;

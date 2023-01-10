@@ -13,12 +13,14 @@
     "webext-bot"
   ],
   "scripts": {
+    "dist": "npm run clean && tsc -p tsconfig.dev.json",
+    "clean": "rimraf dist/",
     "lint": "eslint .",
-    "simulate:issues.opened": "probot receive -e issues -p ./test/fixtures/issues.opened.json ./index.js",
-    "simulate:pull_request.opened": "probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./index.js",
-    "simulate:pull_request.synchronize": "probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./index.js",
-    "simulate:workflow_run.completed": "probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./index.js",
-    "start": "probot run ./index.js",
+    "simulate:issues.opened": "npm run dist && probot receive -e issues -p ./test/fixtures/issues.opened.json ./dist/src/app.js",
+    "simulate:pull_request.opened": "npm run dist && probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./dist/src/app.js",
+    "simulate:pull_request.synchronize": "npm run dist && probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./dist/src/app.js",
+    "simulate:workflow_run.completed": "npm run dist && probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./dist/src/app.js",
+    "start": "npm run dist && probot run ./dist/src/app.js",
     "vercel:build": "vercel build",
     "vercel:deploy": "vercel --prod",
     "vercel:env": "vercel env pull .env",
@@ -34,11 +36,18 @@
     "yaml": "2.1.1"
   },
   "devDependencies": {
+    "@types/bytes": "3.1.1",
+    "@types/minimatch": "5.1.2",
+    "@types/normalize-path": "3.0.0",
+    "@types/semver": "7.3.13",
     "eslint": "8.23.0",
     "eslint-import-resolver-node": "0.3.6",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-node": "11.1.0",
+    "rimraf": "3.0.2",
     "smee-client": "1.2.3",
+    "ts-node": "10.9.1",
+    "typescript": "4.9.4",
     "vercel": "28.2.3"
   },
   "engines": {

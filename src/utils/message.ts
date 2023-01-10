@@ -1,5 +1,13 @@
 /* eslint-disable indent */
-const bytes = require("bytes");
+import bytes from "bytes";
+
+interface ITableRow {
+  title: string;
+  values: {
+    text: string;
+    noHighlight?: boolean;
+  }[];
+}
 
 const byteOptions = {
   decimalPlaces: 2,
@@ -8,7 +16,7 @@ const byteOptions = {
 
 const COMMENT_HEADING = "Web Extension Change Summary";
 
-const getEmoji = (sizeDiff) => {
+export const getEmoji = (sizeDiff: number) => {
   if (sizeDiff > 0) {
     return "🔼";
   }
@@ -18,7 +26,11 @@ const getEmoji = (sizeDiff) => {
   return "⏸";
 };
 
-const getMarkdownTable = ({ heading, tableRows, footerText }) => `
+const getMarkdownTable = (
+  heading: string,
+  tableRows: ITableRow[],
+  footerText: string
+) => `
 ### ${heading}
 | | |
 | --- | --- |
@@ -33,10 +45,14 @@ ${tableRows
 ---
 **${footerText}**`;
 
-const getMessage = (currentSize, latestReleaseSize, commitId) => {
+export const getMessage = (
+  currentSize: number,
+  latestReleaseSize: number,
+  commitId: string
+) => {
   const sizeDiff = currentSize - latestReleaseSize;
   const percentChange = (sizeDiff / latestReleaseSize) * 100;
-  const tableRows = [
+  const tableRows: ITableRow[] = [
     {
       title: "Commit",
       values: [{ text: commitId, noHighlight: true }],
@@ -74,10 +90,5 @@ const getMessage = (currentSize, latestReleaseSize, commitId) => {
     sizeDiff > 10 * 1024
       ? "There is a significant size increase in this commit.🤔"
       : "This commit looks good. Cheers 🙌";
-  return getMarkdownTable({ heading: COMMENT_HEADING, tableRows, footerText });
-};
-
-module.exports = {
-  getEmoji,
-  getMessage,
+  return getMarkdownTable(COMMENT_HEADING, tableRows, footerText);
 };

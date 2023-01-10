@@ -1,8 +1,14 @@
-const Manifest = require("./manifest");
-const Workflow = require("./workflow");
+import Manifest from "./manifest";
+import Workflow from "./workflow";
 
 class Config {
-  constructor(config = {}) {
+  manifest: any;
+  workflow: any;
+  branchesIgnore: any;
+  commentThreshold: any;
+  autoAssign: any;
+
+  constructor(config: any = {}) {
     const { manifest, workflow } = config;
     this.manifest = new Manifest(manifest);
     this.workflow = new Workflow(workflow);
@@ -12,4 +18,4 @@ class Config {
   }
 }
 
-module.exports = Config;
+export default Config;
