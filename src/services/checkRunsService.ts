@@ -1,6 +1,5 @@
 import bytes from "bytes";
 import { Context } from "probot";
-import Config from "../classes/config";
 import { CHECK_NAME } from "../constants";
 import { ICheckOutput, ICreateCheckOutput } from "../interfaces/github";
 import { getEmoji, getMessage } from "../utils/message";
@@ -9,6 +8,7 @@ import {
   fetchLatestReleaseExtensionSize,
 } from "../utils/fetch";
 import { commentOnPullRequests } from "./commentService";
+import { IConfig } from "../constants/config";
 
 const updateCheck = async (
   context: Context<"workflow_run.completed">,
@@ -43,7 +43,7 @@ export const addChecksAndComment = async (
   req: {
     headSha: string;
     check: ICreateCheckOutput;
-    config: Config;
+    config: IConfig;
   }
 ) => {
   const { artifacts_url } = context.payload.workflow_run;
@@ -62,7 +62,7 @@ export const addChecksAndComment = async (
   const actualSizeDiff = currentExtSize - latestReleaseExtSize;
   const absoluteSizeDiff = Math.abs(actualSizeDiff);
   const message = getMessage(currentExtSize, latestReleaseExtSize, headSha);
-  if (absoluteSizeDiff >= config.commentThreshold) {
+  if (absoluteSizeDiff >= config["comment-threshold"]) {
     await commentOnPullRequests(context, message);
   }
   await updateCheck(context, check, {

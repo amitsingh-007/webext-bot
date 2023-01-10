@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Context } from "probot";
 import YAML from "yaml";
-import Config from "../classes/config";
+import { ConfigSchema } from "../constants/config";
 
 export const fetchFile = async (
   context: Context,
@@ -22,7 +22,7 @@ export const fetchFile = async (
 
 export const fetchConfig = async (context: Context, commitId?: string) => {
   const response = await fetchFile(context, ".github/webext.yml", commitId);
-  return new Config(response);
+  return ConfigSchema.parse(response);
 };
 
 export const fetchCurrentArtifactSize = async (
