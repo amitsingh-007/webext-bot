@@ -22,7 +22,7 @@
     "simulate:workflow_run.completed": "npm run dist && probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./dist/src/app.js",
     "start": "npm run dist && probot run ./dist/src/app.js",
     "vercel:build": "vercel build",
-    "vercel:deploy": "vercel --prod",
+    "vercel:preview": "vercel",
     "vercel:env": "vercel env pull .env",
     "vercel:login": "vercel login"
   },
