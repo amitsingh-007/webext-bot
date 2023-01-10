@@ -46,10 +46,11 @@ export const addChecksAndComment = async (
     config: IConfig;
   }
 ) => {
-  const { artifacts_url } = context.payload.workflow_run;
+  const { id } = context.payload.workflow_run;
   const { headSha, check, config } = req;
   const currentExtSize = await fetchCurrentArtifactSize(
-    artifacts_url,
+    context,
+    id,
     config.workflow.artifact
   );
   if (!currentExtSize) {
