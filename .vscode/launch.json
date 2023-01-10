@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "Probot: Simulate Workflow Run - Completed",
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
       "runtimeArgs": ["run-script", "simulate:workflow_run.completed"],
       "runtimeExecutable": "npm",
@@ -17,7 +17,7 @@
     },
     {
       "name": "Probot: Simulate Pull Request - Synchronize",
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
       "runtimeArgs": ["run-script", "simulate:pull_request.synchronize"],
       "runtimeExecutable": "npm",
@@ -31,7 +31,7 @@
     },
     {
       "name": "Probot: Simulate Pull Request - Opened",
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
       "runtimeArgs": ["run-script", "simulate:pull_request.opened"],
       "runtimeExecutable": "npm",
@@ -45,7 +45,7 @@
     },
     {
       "name": "Probot: Simulate Issues - Opened",
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
       "runtimeArgs": ["run-script", "simulate:issues.opened"],
       "runtimeExecutable": "npm",

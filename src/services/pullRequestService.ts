@@ -4,7 +4,7 @@ import { commentOnPullRequest } from "./commentService";
 import { fetchConfig, fetchFile } from "../utils/fetch";
 import path from "path";
 import normalize from "normalize-path";
-import { isValidVersion } from "../utils/validate";
+import { isValidVersion, shouldIgnoreBranch } from "../utils/validate";
 
 const failMessage = `
 Please check the extension version in the manifest.
@@ -17,10 +17,15 @@ export const processPullRequest = async (
     afterSha: string;
     beforeSha: string;
     prNumber: number;
+    branch?: string;
   }
 ) => {
-  const { afterSha, beforeSha, prNumber } = req;
-  const { manifest } = await fetchConfig(context as any, afterSha);
+  const { afterSha, beforeSha, prNumber, branch } = req;
+  const config = await fetchConfig(context as any, afterSha);
+  if (branch && shouldIgnoreBranch(config, branch)) {
+    return;
+  }
+  const { manifest } = config;
   const manifestFilePath = normalize(
     path.normalize(path.join(manifest.dir, manifest.name))
   );
