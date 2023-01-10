@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Context } from "probot";
 import YAML from "yaml";
 import { ConfigSchema } from "../constants/config";
@@ -26,14 +25,19 @@ export const fetchConfig = async (context: Context, commitId?: string) => {
 };
 
 export const fetchCurrentArtifactSize = async (
-  artifactUrl: string,
+  context: Context<"workflow_run.completed">,
+  workflowRunId: number,
   artifactName: string
 ): Promise<number | undefined> => {
-  const response = await axios.get(artifactUrl);
-  const { artifacts } = response.data;
-  const extension =
-    artifacts &&
-    artifacts.find((artifact: any) => artifact.name === artifactName);
+  const { repository } = context.payload;
+  const { data } = await context.octokit.actions.listWorkflowRunArtifacts({
+    owner: repository.owner.login,
+    repo: repository.name,
+    run_id: workflowRunId,
+  });
+  const extension = data?.artifacts.find(
+    (artifact) => artifact.name === artifactName
+  );
   return extension?.size_in_bytes;
 };
 
