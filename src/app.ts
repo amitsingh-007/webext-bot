@@ -57,6 +57,7 @@ const probotApp = (app: Probot) => {
         beforeSha: base.sha,
         afterSha: head.sha,
         prNumber: number,
+        branch: head.ref,
       });
       if (!shouldIgnoreBranch(config, head.ref)) {
         await addAssignees(context, config, number);

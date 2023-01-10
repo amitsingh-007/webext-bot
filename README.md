@@ -4,29 +4,35 @@
 
 ## How to use
 
-- Create a `.webextrc.json` in the root of the project. Following are the supported field in the config with their default values:
+- Create a `webext.yml` inside `.github` directory. Following are the supported field in the config:
 
-  ```js
-  {
-    "manifest": {
-      //name of the web extension manifest file
-      "name": "manifest.json",
-      //directory of the manifest file
-      "dir": "./"
-    },
-    "workflow": {
-      //name of the GH workflow which generates the extension asset
-      "name": "Extension CI",
-      //name by which asset is uploaded
-      "artifact": "extension"
-    },
-    //these branches wont be processed. Takes array of glob patterns. Eg. ["dependabot/**"]
-    "branchesIgnore": [""],
-    //minimum size change to allow a comment on the pull request
-    "commentThreshold": 0,
-    //auto assign the list of users on opening every new PR and issue
-    "autoAssign": ["xyz-github-username"]
-  }
+  ```yml
+  manifest:
+
+    <!-- Required: name of the web extension manifest file -->
+    name: manifest.json
+
+    <!-- Required: directory of the manifest file -->
+    dir: './'
+
+  workflow:
+
+    <!-- Required: name of the GitHub workflow which generates the extension asset -->
+    name: Build CI
+
+    <!-- Required: name by which asset which is uploaded in the workflow -->
+    artifact: extension-file
+
+  <!-- Optional: these branches wont be processed. Takes an array of glob patterns -->
+  branches-ignore:
+    - dependabot/**
+
+  <!-- Optional: minimum size change to allow a comment on the pull request -->
+  comment-threshold: 512
+
+  <!-- Optional: auto assign the list of users on opening every new PR and issue -->
+  auto-assign:
+    - xyz-github-username
   ```
 
 - There must be a Github Workflow which creates the web extension as an asset during the run. This bot uses that file to process further.

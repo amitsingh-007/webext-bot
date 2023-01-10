@@ -1,17 +1,15 @@
 import { Workflow, WorkflowRun } from "@octokit/webhooks-types";
 import minimatch from "minimatch";
 import semver from "semver";
-import Config from "../classes/config";
+import { IConfig } from "../constants/config";
 
-export const shouldIgnoreBranch = (config: Config, branch: string): boolean =>
-  config.branchesIgnore.some((branchGlob: any) =>
-    minimatch(branch, branchGlob)
-  );
+export const shouldIgnoreBranch = (config: IConfig, branch: string): boolean =>
+  config["branches-ignore"].some((branchGlob) => minimatch(branch, branchGlob));
 
 export const shouldSkipWorkflow = (
   workflow: Workflow,
   workflowRun: WorkflowRun,
-  config: Config
+  config: IConfig
 ) =>
   workflow.name !== config.workflow.name ||
   shouldIgnoreBranch(config, workflowRun.head_branch);
