@@ -2,7 +2,7 @@ import bytes from "bytes";
 import { Context } from "probot";
 import { CHECK_NAME } from "../constants";
 import { ICheckOutput, ICreateCheckOutput } from "../interfaces/github";
-import { getEmoji, getMessage } from "../utils/message";
+import { getEmoji, getExtSizeChangeComment } from "../utils/message";
 import {
   fetchCurrentArtifactSize,
   fetchLatestReleaseExtensionSize,
@@ -62,7 +62,11 @@ export const addChecksAndComment = async (
   }
   const actualSizeDiff = currentExtSize - latestReleaseExtSize;
   const absoluteSizeDiff = Math.abs(actualSizeDiff);
-  const message = getMessage(currentExtSize, latestReleaseExtSize, headSha);
+  const message = await getExtSizeChangeComment(
+    currentExtSize,
+    latestReleaseExtSize,
+    headSha
+  );
   if (absoluteSizeDiff >= config["comment-threshold"]) {
     await commentOnPullRequests(context, message);
   }
