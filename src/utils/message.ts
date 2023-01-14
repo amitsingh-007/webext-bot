@@ -1,94 +1,54 @@
-/* eslint-disable indent */
-import bytes from "bytes";
+import bytes, { BytesOptions } from "bytes";
+const markdownTable = require("markdown-table");
 
-interface ITableRow {
-  title: string;
-  values: {
-    text: string;
-    noHighlight?: boolean;
-  }[];
-}
-
-const byteOptions = {
+const byteOptions: BytesOptions = {
   decimalPlaces: 2,
   fixedDecimals: true,
+  unitSeparator: " ",
 };
-
-const COMMENT_HEADING = "Web Extension Change Summary";
 
 export const getEmoji = (sizeDiff: number) => {
   if (sizeDiff > 0) {
-    return "🔼";
+    return "🔺";
   }
   if (sizeDiff < 0) {
-    return "🔽";
+    return "✅";
   }
-  return "⏸";
+  return "0️⃣";
 };
 
-const getMarkdownTable = (
-  heading: string,
-  tableRows: ITableRow[],
-  footerText: string
-) => `
-### ${heading}
-| | |
-| --- | --- |
-${tableRows
-  .map((row) => {
-    const texts = row.values.map(({ text, noHighlight }) =>
-      noHighlight ? text : `\`${text}\``
-    );
-    return `| **${row.title}** | ${texts.join(" \\| ")} |`;
-  })
-  .join("\n")}
----
-**${footerText}**`;
-
-export const getMessage = (
+export const getExtSizeChangeComment = async (
   currentSize: number,
   latestReleaseSize: number,
   commitId: string
 ) => {
   const sizeDiff = currentSize - latestReleaseSize;
   const percentChange = (sizeDiff / latestReleaseSize) * 100;
-  const tableRows: ITableRow[] = [
-    {
-      title: "Commit",
-      values: [{ text: commitId, noHighlight: true }],
-    },
-    {
-      title: "Latest Release Size",
-      values: [
-        { text: bytes(latestReleaseSize, byteOptions) },
-        { text: `${latestReleaseSize} Bytes` },
-      ],
-    },
-    {
-      title: "Current Size",
-      values: [
-        { text: bytes(currentSize, byteOptions) },
-        { text: `${currentSize} Bytes` },
-      ],
-    },
-    {
-      title: "Size Difference",
-      values: [
-        { text: bytes(sizeDiff, byteOptions) },
-        { text: `${sizeDiff} Bytes` },
-      ],
-    },
-    {
-      title: "Percent Change",
-      values: [
-        { text: `${percentChange.toFixed(2)}%` },
-        { text: getEmoji(sizeDiff) },
-      ],
-    },
-  ];
+
+  const summary = `Extension Size Change: &nbsp ${bytes(
+    sizeDiff,
+    byteOptions
+  )} ${getEmoji(sizeDiff)}`;
+  const description = markdownTable([
+    ["", ""],
+    ["Commit", commitId],
+    ["Latest release size", bytes(latestReleaseSize, byteOptions)],
+    ["Current size", bytes(currentSize, byteOptions)],
+    ["Percent change", `${percentChange.toFixed(2)} %`],
+  ]);
   const footerText =
-    sizeDiff > 10 * 1024
-      ? "There is a significant size increase in this commit.🤔"
-      : "This commit looks good. Cheers 🙌";
-  return getMarkdownTable(COMMENT_HEADING, tableRows, footerText);
+    sizeDiff > 10 * 1024 //10KB
+      ? "Significant size increase in this commit ⚠️"
+      : "This commit looks good, cheers 👏";
+
+  return `
+  <details>
+  <summary>${summary}</summary>
+  </br>
+
+  ${description}
+  </details/>
+
+  **${footerText}**
+  `;
 };
