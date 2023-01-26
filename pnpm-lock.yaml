@@ -24,7 +24,6 @@ specifiers:
   zod: 3.20.2
 
 dependencies:
-  '@octokit/webhooks-types': 4.4.0
   bytes: 3.1.2
   markdown-table: 2.0.0
   minimatch: 5.1.2
@@ -35,6 +34,7 @@ dependencies:
   zod: 3.20.2
 
 devDependencies:
+  '@octokit/webhooks-types': 4.4.0
   '@types/bytes': 3.1.1
   '@types/minimatch': 5.1.2
   '@types/normalize-path': 3.0.0
@@ -373,7 +373,6 @@ packages:
 
   /@octokit/webhooks-types/4.4.0:
     resolution: {integrity: sha512-gK9L2pWLZ1CWWlf9zwzFBQeA3dgyWdRe6gqAedR5T7adFZpoHg4De6GeXIFySV796ooQtKhW4eFfQLFQF5ydAA==}
-    dev: false
 
   /@octokit/webhooks/9.13.0:
     resolution: {integrity: sha512-rQLItw2HrDEtouR7js5KU0r2e+8uBWFIuREgICTtz93rppk7+WQKCceQoHiEWY7vqXV7R3d1Uho6jZmbOOjg+A==}
