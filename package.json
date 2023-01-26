@@ -13,18 +13,18 @@
     "webext-bot"
   ],
   "scripts": {
-    "dist": "npm run clean && tsc -p tsconfig.dev.json",
-    "clean": "rimraf dist/",
+    "dist": "pnpm lint && pnpm clean && tsc -p tsconfig.dev.json",
+    "clean": "rimraf dist",
     "lint": "eslint .",
-    "simulate:issues.opened": "npm run dist && probot receive -e issues -p ./test/fixtures/issues.opened.json ./dist/src/app.js",
-    "simulate:pull_request.opened": "npm run dist && probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./dist/src/app.js",
-    "simulate:pull_request.synchronize": "npm run dist && probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./dist/src/app.js",
-    "simulate:workflow_run.completed": "npm run dist && probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./dist/src/app.js",
-    "start": "npm run dist && probot run ./dist/src/app.js",
+    "simulate:issues.opened": "pnpm dist && probot receive -e issues -p ./test/fixtures/issues.opened.json ./dist/src/app.js",
+    "simulate:pull_request.opened": "pnpm dist && probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./dist/src/app.js",
+    "simulate:pull_request.synchronize": "pnpm dist && probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./dist/src/app.js",
+    "simulate:workflow_run.completed": "pnpm dist && probot receive -e workflow_run -p ./test/fixtures/workflow_run.completed.json ./dist/src/app.js",
+    "start": "pnpm dist && probot run ./dist/src/app.js",
     "vercel:build": "vercel build",
     "vercel:preview": "vercel",
     "vercel:env": "vercel env pull .env",
-    "vercel:login": "vercel login"
+    "vercel:link": "vercel link"
   },
   "dependencies": {
     "bytes": "3.1.2",
@@ -37,6 +37,7 @@
     "zod": "3.20.2"
   },
   "devDependencies": {
+    "@octokit/webhooks-types": "^4.0.0",
     "@types/bytes": "3.1.1",
     "@types/minimatch": "5.1.2",
     "@types/normalize-path": "3.0.0",

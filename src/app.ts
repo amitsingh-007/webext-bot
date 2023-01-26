@@ -42,6 +42,7 @@ const probotApp = (app: Probot) => {
         beforeSha: before,
         afterSha: after,
         prNumber: pull_request.number,
+        branch: pull_request.head.ref,
       });
     } catch (error: any) {
       context.log.info(error);
