@@ -6,7 +6,7 @@
       "type": "node",
       "request": "launch",
       "runtimeArgs": ["run-script", "simulate:workflow_run.completed"],
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
       "resolveSourceMapLocations": [
@@ -20,7 +20,7 @@
       "type": "node",
       "request": "launch",
       "runtimeArgs": ["run-script", "simulate:pull_request.synchronize"],
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
       "resolveSourceMapLocations": [
@@ -34,7 +34,7 @@
       "type": "node",
       "request": "launch",
       "runtimeArgs": ["run-script", "simulate:pull_request.opened"],
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
       "resolveSourceMapLocations": [
@@ -48,7 +48,7 @@
       "type": "node",
       "request": "launch",
       "runtimeArgs": ["run-script", "simulate:issues.opened"],
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
       "resolveSourceMapLocations": [
