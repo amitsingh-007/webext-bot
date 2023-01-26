@@ -17,12 +17,12 @@ export const processPullRequest = async (
     afterSha: string;
     beforeSha: string;
     prNumber: number;
-    branch?: string;
+    branch: string;
   }
 ) => {
   const { afterSha, beforeSha, prNumber, branch } = req;
   const config = await fetchConfig(context as any, afterSha);
-  if (branch && shouldIgnoreBranch(config, branch)) {
+  if (shouldIgnoreBranch(config, branch)) {
     return;
   }
   const { manifest } = config;
