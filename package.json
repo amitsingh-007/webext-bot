@@ -13,8 +13,9 @@
     "webext-bot"
   ],
   "scripts": {
-    "dist": "npm run clean && tsc -p tsconfig.dev.json",
-    "clean": "rimraf dist/",
+    "build": "npm run clean && tsc -p tsconfig.dev.json",
+    "dist": "npm run lint && npm run build",
+    "clean": "rimraf dist",
     "lint": "eslint .",
     "simulate:issues.opened": "npm run dist && probot receive -e issues -p ./test/fixtures/issues.opened.json ./dist/src/app.js",
     "simulate:pull_request.opened": "npm run dist && probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./dist/src/app.js",
