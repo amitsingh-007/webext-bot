@@ -1,5 +1,5 @@
 import bytes, { BytesOptions } from "bytes";
-const markdownTable = require("markdown-table");
+import { markdownTable } from "markdown-table";
 
 const byteOptions: BytesOptions = {
   decimalPlaces: 2,
