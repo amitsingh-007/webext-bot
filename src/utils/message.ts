@@ -1,6 +1,7 @@
 import bytes, { BytesOptions } from "bytes";
 import { markdownTable } from "markdown-table";
 
+
 const byteOptions: BytesOptions = {
   decimalPlaces: 2,
   fixedDecimals: true,
