@@ -41,8 +41,8 @@ devDependencies:
     specifier: 5.1.2
     version: 5.1.2
   '@types/normalize-path':
-    specifier: 3.0.0
-    version: 3.0.0
+    specifier: 3.0.2
+    version: 3.0.2
   '@types/semver':
     specifier: 7.3.13
     version: 7.3.13
@@ -659,8 +659,8 @@ packages:
     resolution: {integrity: sha512-S63Dlv4zIPb8x6MMTgDq5WWRJQe56iBEY0O3SOFA9JrRienkOVDXSXBjjJw6HTNQYSE2JI6GMCR6LVbIMHJVvA==}
     dev: false
 
-  /@types/normalize-path@3.0.0:
-    resolution: {integrity: sha512-Nd8y/5t/7CRakPYiyPzr/IAfYusy1FkcZYFEAcoMZkwpJv2n4Wm+olW+e7xBdHEXhOnWdG9ddbar0gqZWS4x5Q==}
+  /@types/normalize-path@3.0.2:
+    resolution: {integrity: sha512-DO++toKYPaFn0Z8hQ7Tx+3iT9t77IJo/nDiqTXilgEP+kPNIYdpS9kh3fXuc53ugqwp9pxC1PVjCpV1tQDyqMA==}
     dev: true
 
   /@types/pino-http@5.7.0:
