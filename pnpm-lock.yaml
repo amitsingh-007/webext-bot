@@ -27,8 +27,8 @@ dependencies:
     specifier: 2.2.1
     version: 2.2.1
   zod:
-    specifier: 3.20.2
-    version: 3.20.2
+    specifier: 3.22.4
+    version: 3.22.4
 
 devDependencies:
   '@octokit/webhooks-types':
@@ -4634,6 +4634,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zod@3.20.2:
-    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
