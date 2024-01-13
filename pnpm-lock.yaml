@@ -21,8 +21,8 @@ dependencies:
     specifier: 12.2.9
     version: 12.2.9
   semver:
-    specifier: 7.3.8
-    version: 7.3.8
+    specifier: 7.5.4
+    version: 7.5.4
   yaml:
     specifier: 2.2.1
     version: 2.2.1
@@ -44,8 +44,8 @@ devDependencies:
     specifier: 3.0.2
     version: 3.0.2
   '@types/semver':
-    specifier: 7.3.13
-    version: 7.3.13
+    specifier: 7.5.6
+    version: 7.5.6
   eslint:
     specifier: 8.56.0
     version: 8.56.0
@@ -224,7 +224,7 @@ packages:
       nopt: 5.0.0
       npmlog: 5.0.1
       rimraf: 3.0.2
-      semver: 7.3.8
+      semver: 7.5.4
       tar: 6.1.13
     transitivePeerDependencies:
       - encoding
@@ -747,8 +747,8 @@ packages:
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
     dev: false
 
-  /@types/semver@7.3.13:
-    resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+  /@types/semver@7.5.6:
+    resolution: {integrity: sha512-dn1l8LaMea/IjDoHNd9J52uBbInB796CDffS6VdIxvqYCPSG0V0DzHp76GpaWnlhg88uYyPbXCDIowa86ybd5A==}
     dev: true
 
   /@types/serve-static@1.13.10:
@@ -2017,7 +2017,7 @@ packages:
       ignore: 5.2.0
       minimatch: 3.1.2
       resolve: 1.22.1
-      semver: 6.3.0
+      semver: 6.3.1
     dev: true
 
   /eslint-scope@7.2.2:
@@ -3686,7 +3686,7 @@ packages:
       pino-http: 5.7.0
       pkg-conf: 3.1.0
       resolve: 1.22.1
-      semver: 7.3.8
+      semver: 7.5.4
       update-dotenv: 1.1.1(dotenv@8.6.0)
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -3905,11 +3905,6 @@ packages:
     hasBin: true
     dev: false
 
-  /semver@6.3.0:
-    resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
-    hasBin: true
-    dev: true
-
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -3923,8 +3918,8 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
-  /semver@7.3.8:
-    resolution: {integrity: sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==}
+  /semver@7.5.4:
+    resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
