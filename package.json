@@ -31,7 +31,7 @@
     "markdown-table": "2.0.0",
     "minimatch": "5.1.2",
     "normalize-path": "3.0.0",
-    "probot": "12.2.9",
+    "probot": "12.3.3",
     "semver": "7.5.4",
     "yaml": "2.2.1",
     "zod": "3.22.4"
