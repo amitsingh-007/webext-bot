@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^4.0.0
     version: 4.4.0
   '@types/bytes':
-    specifier: 3.1.1
-    version: 3.1.1
+    specifier: 3.1.4
+    version: 3.1.4
   '@types/minimatch':
     specifier: 5.1.2
     version: 5.1.2
@@ -562,8 +562,8 @@ packages:
     resolution: {integrity: sha512-wJsiX1tosQ+J5+bY5LrSahHxr2wT+uME5UDwdN1kg4frt40euqA+wzECkmq4t5QbveHiJepfdThgQrPw6KiSlg==}
     dev: false
 
-  /@types/bytes@3.1.1:
-    resolution: {integrity: sha512-lOGyCnw+2JVPKU3wIV0srU0NyALwTBJlVSx5DfMQOFuuohA8y9S8orImpuIQikZ0uIQ8gehrRjxgQC1rLRi11w==}
+  /@types/bytes@3.1.4:
+    resolution: {integrity: sha512-A0uYgOj3zNc4hNjHc5lYUfJQ/HVyBXiUMKdXd7ysclaE6k9oJdavQzODHuwjpUu2/boCP8afjQYi8z/GtvNCWA==}
     dev: true
 
   /@types/connect@3.4.35:
