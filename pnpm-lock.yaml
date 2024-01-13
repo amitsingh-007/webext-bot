@@ -12,8 +12,8 @@ dependencies:
     specifier: 2.0.0
     version: 2.0.0
   minimatch:
-    specifier: 5.1.2
-    version: 5.1.2
+    specifier: 9.0.3
+    version: 9.0.3
   normalize-path:
     specifier: 3.0.0
     version: 3.0.0
@@ -3183,7 +3183,6 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
       brace-expansion: 2.0.1
-    dev: true
 
   /minimist@1.2.6:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
