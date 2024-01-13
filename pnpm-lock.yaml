@@ -18,8 +18,8 @@ dependencies:
     specifier: 3.0.0
     version: 3.0.0
   probot:
-    specifier: 12.2.9
-    version: 12.2.9
+    specifier: 12.3.3
+    version: 12.3.3
   semver:
     specifier: 7.5.4
     version: 7.5.4
@@ -434,7 +434,7 @@ packages:
       '@octokit/request-error': 2.1.0
       '@octokit/types': 6.26.0
       is-plain-object: 5.0.0
-      node-fetch: 2.6.7
+      node-fetch: 2.6.9
       universal-user-agent: 6.0.0
     transitivePeerDependencies:
       - encoding
@@ -456,20 +456,20 @@ packages:
     resolution: {integrity: sha512-35cfQ4YWlnZnmZKmIxlGPUPLtbkF8lr/A/1Sk1eC0ddLMwQN06dOuLc+dI3YLQS+T+MoNt3DIQ0NynwgKPilig==}
     dev: false
 
-  /@octokit/webhooks-types@4.4.0:
-    resolution: {integrity: sha512-gK9L2pWLZ1CWWlf9zwzFBQeA3dgyWdRe6gqAedR5T7adFZpoHg4De6GeXIFySV796ooQtKhW4eFfQLFQF5ydAA==}
+  /@octokit/webhooks-types@5.8.0:
+    resolution: {integrity: sha512-8adktjIb76A7viIdayQSFuBEwOzwhDC+9yxZpKNHjfzrlostHCw0/N7JWpWMObfElwvJMk2fY2l1noENCk9wmw==}
     dev: false
 
   /@octokit/webhooks-types@7.3.1:
     resolution: {integrity: sha512-u6355ZsZnHwmxen30SrqnYb1pXieBFkYgkNzt+Ed4Ao5tupN1OErHfzwiV6hq6duGkDAYASbq7/uVJQ69PjLEg==}
     dev: true
 
-  /@octokit/webhooks@9.13.0:
-    resolution: {integrity: sha512-rQLItw2HrDEtouR7js5KU0r2e+8uBWFIuREgICTtz93rppk7+WQKCceQoHiEWY7vqXV7R3d1Uho6jZmbOOjg+A==}
+  /@octokit/webhooks@9.26.3:
+    resolution: {integrity: sha512-DLGk+gzeVq5oK89Bo601txYmyrelMQ7Fi5EnjHE0Xs8CWicy2xkmnJMKptKJrBJpstqbd/9oeDFi/Zj2pudBDQ==}
     dependencies:
       '@octokit/request-error': 2.1.0
       '@octokit/webhooks-methods': 2.0.0
-      '@octokit/webhooks-types': 4.4.0
+      '@octokit/webhooks-types': 5.8.0
       aggregate-error: 3.1.0
     dev: false
 
@@ -2627,7 +2627,6 @@ packages:
       setprototypeof: 1.1.1
       statuses: 1.5.0
       toidentifier: 1.0.0
-    dev: true
 
   /https-proxy-agent@5.0.0:
     resolution: {integrity: sha512-EkYm5BcKUGiduxzSt3Eppko+PiNWNEpa4ySk9vTC6wDsQJW9rHSa+UhGNJoRYp7bz6Ht1eaRIa6QaJqO5rCFbA==}
@@ -3285,6 +3284,7 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
+    dev: true
 
   /node-fetch@2.6.9:
     resolution: {integrity: sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==}
@@ -3296,7 +3296,6 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
-    dev: true
 
   /node-gyp-build@4.6.0:
     resolution: {integrity: sha512-NTZVKn9IylLwUzaKjkas1e4u2DLNcV4rdYagA4PWdPwW87Bi7z+BznyKSRwS/761tV/lzCGXplWsiaMjLqP2zQ==}
@@ -3651,8 +3650,8 @@ packages:
       parse-ms: 2.1.0
     dev: true
 
-  /probot@12.2.9:
-    resolution: {integrity: sha512-8T98zB6iN9oeRuHjAC0Hgt4JS6IgB9pNOkQKZL+ie2Zj4oZABLtzP2GhZXbEBNs7B5dUIFfSwApbKlY2yIxotg==}
+  /probot@12.3.3:
+    resolution: {integrity: sha512-cdtKd+xISzi8sw6++BYBXleRknCA6hqUMoHj/sJqQBrjbNxQLhfeFCq9O2d0Z4eShsy5YFRR3MWwDKJ9uAE0CA==}
     engines: {node: '>=10.21'}
     hasBin: true
     dependencies:
@@ -3663,7 +3662,7 @@ packages:
       '@octokit/plugin-retry': 3.0.9
       '@octokit/plugin-throttling': 3.5.1(@octokit/core@3.5.1)
       '@octokit/types': 8.0.0
-      '@octokit/webhooks': 9.13.0
+      '@octokit/webhooks': 9.26.3
       '@probot/get-private-key': 1.1.1
       '@probot/octokit-plugin-config': 1.1.2(@octokit/core@3.5.1)
       '@probot/pino': 2.3.4
@@ -3685,7 +3684,7 @@ packages:
       pino: 6.13.1
       pino-http: 5.7.0
       pkg-conf: 3.1.0
-      resolve: 1.22.1
+      resolve: 1.22.8
       semver: 7.5.4
       update-dotenv: 1.1.1(dotenv@8.6.0)
       uuid: 8.3.2
@@ -3831,6 +3830,7 @@ packages:
       is-core-module: 2.13.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
+    dev: true
 
   /resolve@1.22.8:
     resolution: {integrity: sha512-oKWePCxqpd6FlLvGV1VU0x7bkPmmCNolxzjMf4NczoDnQcIWrAF+cPtZn5i6n+RfD2d9i0tzpKnG6Yk168yIyw==}
@@ -3839,7 +3839,6 @@ packages:
       is-core-module: 2.13.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
-    dev: true
 
   /reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
@@ -3936,7 +3935,7 @@ packages:
       escape-html: 1.0.3
       etag: 1.8.1
       fresh: 0.5.2
-      http-errors: 1.7.2
+      http-errors: 1.7.3
       mime: 1.6.0
       ms: 2.1.1
       on-finished: 2.3.0
