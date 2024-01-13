@@ -18,7 +18,7 @@ pnpm vercel:env
 pnpm start
 
 # Deploy the bot
-pnpm vercel:deploy OR it is automatically deployed on push to main `branch`
+pnpm vercel:deploy OR it is automatically deployed on push to `main` branch
 ```
 
 To simulate Github Webhooks on local/dev environment, please look at [this](https://probot.github.io/docs/simulating-webhooks/).
