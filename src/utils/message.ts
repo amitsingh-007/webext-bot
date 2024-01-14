@@ -9,7 +9,7 @@ const byteOptions: BytesOptions = {
 
 export const getEmoji = (sizeDiff: number) => {
   if (sizeDiff > 0) {
-    return "🔺 ";
+    return "🔺";
   }
   if (sizeDiff < 0) {
     return "✅";
