@@ -7,7 +7,7 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  Deploy:
+  Build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -20,3 +20,12 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
           github-comment: false
+
+      - name: Add status check
+        uses: LouisBrunner/checks-action@v1.6.2
+        if: always()
+        with:
+          sha: ${{ github.sha }}
+          token: ${{ github.token }}
+          name: Build
+          conclusion: ${{ job.status }}
