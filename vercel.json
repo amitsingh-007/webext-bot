@@ -1,4 +1,9 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "regions": ["bom1"],
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm dist",
   "rewrites": [
     {
       "source": "/api/(.*)",
