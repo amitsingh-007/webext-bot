@@ -1,20 +1,21 @@
 import bytes, { BytesOptions } from "bytes";
-import { markdownTable } from "markdown-table";
+import json2md from "json2md";
+
+json2md.converters.collapsible = (input: {
+  summary: string;
+  description: string;
+}) => `
+<details>
+<summary>${input.summary}</summary>
+</br>
+
+${input.description}
+</details>`;
 
 const byteOptions: BytesOptions = {
   decimalPlaces: 2,
   fixedDecimals: true,
   unitSeparator: " ",
-};
-
-export const getEmoji = (sizeDiff: number) => {
-  if (sizeDiff > 0) {
-    return "🔺";
-  }
-  if (sizeDiff < 0) {
-    return "✅";
-  }
-  return "0️⃣";
 };
 
 export const getExtSizeChangeComment = async (
@@ -25,30 +26,42 @@ export const getExtSizeChangeComment = async (
   const sizeDiff = currentSize - latestReleaseSize;
   const percentChange = (sizeDiff / latestReleaseSize) * 100;
 
-  const summary = `Extension Size Change: &nbsp ${bytes(
-    sizeDiff,
-    byteOptions
-  )} ${getEmoji(sizeDiff)}`;
-  const description = markdownTable([
-    ["", ""],
-    ["Commit", commitId],
-    ["Latest release size", bytes(latestReleaseSize, byteOptions)],
-    ["Current size", bytes(currentSize, byteOptions)],
-    ["Percent change", `${percentChange.toFixed(2)} %`],
+  return json2md([
+    {
+      collapsible: {
+        summary: `Extension Size Change: &nbsp ${bytes(
+          sizeDiff,
+          byteOptions
+        )} ${getEmoji(sizeDiff)}`,
+        description: json2md({
+          table: {
+            headers: ["", ""],
+            rows: [
+              ["Commit", commitId],
+              ["Latest release size", bytes(latestReleaseSize, byteOptions)],
+              ["Current size", bytes(currentSize, byteOptions)],
+              ["Percent change", `${percentChange.toFixed(2)} %`],
+            ],
+          },
+        }),
+      },
+    },
+    { hr: "" },
+    {
+      h4:
+        sizeDiff > 10 * 1024 //10KB
+          ? "Significant size increase in this commit ⚠️"
+          : "This commit looks good, cheers 👏",
+    },
   ]);
-  const footerText =
-    sizeDiff > 10 * 1024 //10KB
-      ? "Significant size increase in this commit ⚠️"
-      : "This commit looks good, cheers 👏";
+};
 
-  return `
-  <details>
-  <summary>${summary}</summary>
-  </br>
-
-  ${description}
-  </details/>
-
-  **${footerText}**
-  `;
+export const getEmoji = (sizeDiff: number) => {
+  if (sizeDiff > 0) {
+    return "🔺";
+  }
+  if (sizeDiff < 0) {
+    return "✅";
+  }
+  return "0️⃣";
 };

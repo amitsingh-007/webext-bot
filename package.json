@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "bytes": "3.1.2",
-    "markdown-table": "3.0.3",
+    "json2md": "2.0.1",
     "minimatch": "9.0.3",
     "normalize-path": "3.0.0",
     "probot": "12.3.3",
@@ -39,6 +39,7 @@
   "devDependencies": {
     "@octokit/webhooks-types": "6.4.0",
     "@types/bytes": "3.1.4",
+    "@types/json2md": "1.5.4",
     "@types/minimatch": "5.1.2",
     "@types/normalize-path": "3.0.2",
     "@types/semver": "7.5.6",
