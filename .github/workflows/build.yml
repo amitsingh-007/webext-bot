@@ -25,7 +25,6 @@ jobs:
         uses: LouisBrunner/checks-action@v1.6.2
         if: always()
         with:
-          sha: ${{ github.sha }}
           token: ${{ github.token }}
-          name: Build
+          name: Build Check
           conclusion: ${{ job.status }}
