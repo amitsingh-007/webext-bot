@@ -33,7 +33,7 @@
     "normalize-path": "3.0.0",
     "probot": "12.3.3",
     "semver": "7.5.4",
-    "yaml": "2.3.4",
+    "yaml": "2.4.1",
     "zod": "3.22.4"
   },
   "devDependencies": {
