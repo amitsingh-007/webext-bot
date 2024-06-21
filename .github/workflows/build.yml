@@ -22,7 +22,7 @@ jobs:
           github-comment: false
 
       - name: Add status check
-        uses: LouisBrunner/checks-action@v1.6.2
+        uses: LouisBrunner/checks-action@v2.0.0
         if: always()
         with:
           token: ${{ github.token }}
