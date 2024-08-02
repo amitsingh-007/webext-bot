@@ -21,8 +21,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       probot:
-        specifier: 13.3.0
-        version: 13.3.0
+        specifier: 13.3.6
+        version: 13.3.6
       semver:
         specifier: 7.6.2
         version: 7.6.2
@@ -1678,16 +1678,8 @@ packages:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
     engines: {node: '>=8.6'}
 
-  mime-db@1.47.0:
-    resolution: {integrity: sha512-QBmA/G2y+IfeS4oktet3qRZ+P5kPhCKRXxXnQEudYqUaEioAU1/Lq2us3D/t1Jfo4hE9REQPrbB7K5sOczJVIw==}
-    engines: {node: '>= 0.6'}
-
   mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
-    engines: {node: '>= 0.6'}
-
-  mime-types@2.1.30:
-    resolution: {integrity: sha512-crmjA4bLtR8m9qLpHvgxSChT+XoSlZi8J4n/aIdn3z92e/U47Z0V/yl+Wh9W046GgFVAmoNR/fmdbZYcSSIUeg==}
     engines: {node: '>= 0.6'}
 
   mime-types@2.1.35:
@@ -1992,8 +1984,8 @@ packages:
     resolution: {integrity: sha512-973driJZvxiGOQ5ONsFhOF/DtzPMOMtgC11kCpUrPGMTgqp2q/1gwzCquocrN33is0VZ5GFHXZYMM9l6h67v2Q==}
     engines: {node: '>=10'}
 
-  probot@13.3.0:
-    resolution: {integrity: sha512-X9xb96WvaycsPiNj1QOte4ABKb6mSwHpWHJKq/dTjFSMpLT4kC5SRN4wKQi1zwZHsnIW/twbOeOZespGfkNkYA==}
+  probot@13.3.6:
+    resolution: {integrity: sha512-bgNu5p6rcAbaXwX/il6Y6zYtjN7VKPBKFENAAOp0v4Z5ysiwyX6si/agxO8MP4RPU2A0DazNZP2FVnYaqb54FQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3782,7 +3774,7 @@ snapshots:
       array-flatten: 1.1.1
       body-parser: 1.20.2
       content-disposition: 0.5.4
-      content-type: 1.0.4
+      content-type: 1.0.5
       cookie: 0.6.0
       cookie-signature: 1.0.6
       debug: 2.6.9
@@ -4336,13 +4328,7 @@ snapshots:
       braces: 3.0.2
       picomatch: 2.3.1
 
-  mime-db@1.47.0: {}
-
   mime-db@1.52.0: {}
-
-  mime-types@2.1.30:
-    dependencies:
-      mime-db: 1.47.0
 
   mime-types@2.1.35:
     dependencies:
@@ -4631,7 +4617,7 @@ snapshots:
     dependencies:
       parse-ms: 2.1.0
 
-  probot@13.3.0:
+  probot@13.3.6:
     dependencies:
       '@octokit/core': 5.2.0
       '@octokit/plugin-enterprise-compatibility': 4.1.0
@@ -4650,7 +4636,6 @@ snapshots:
       commander: 12.0.0
       deepmerge: 4.3.1
       dotenv: 16.4.5
-      eventsource: 2.0.2
       express: 4.19.2
       ioredis: 5.4.1
       js-yaml: 4.1.0
@@ -4659,7 +4644,6 @@ snapshots:
       pino: 9.2.0
       pino-http: 10.1.0
       pkg-conf: 3.1.0
-      resolve: 1.22.8
       update-dotenv: 1.1.1(dotenv@16.4.5)
     transitivePeerDependencies:
       - supports-color
@@ -5041,7 +5025,7 @@ snapshots:
   type-is@1.6.18:
     dependencies:
       media-typer: 0.3.0
-      mime-types: 2.1.30
+      mime-types: 2.1.35
 
   typed-array-buffer@1.0.0:
     dependencies:
