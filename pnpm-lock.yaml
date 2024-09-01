@@ -21,8 +21,8 @@ importers:
         specifier: 3.0.0
         version: 3.0.0
       probot:
-        specifier: 13.3.6
-        version: 13.3.6
+        specifier: 13.3.7
+        version: 13.3.7
       semver:
         specifier: 7.6.3
         version: 7.6.3
@@ -1991,8 +1991,8 @@ packages:
     resolution: {integrity: sha512-973driJZvxiGOQ5ONsFhOF/DtzPMOMtgC11kCpUrPGMTgqp2q/1gwzCquocrN33is0VZ5GFHXZYMM9l6h67v2Q==}
     engines: {node: '>=10'}
 
-  probot@13.3.6:
-    resolution: {integrity: sha512-bgNu5p6rcAbaXwX/il6Y6zYtjN7VKPBKFENAAOp0v4Z5ysiwyX6si/agxO8MP4RPU2A0DazNZP2FVnYaqb54FQ==}
+  probot@13.3.7:
+    resolution: {integrity: sha512-aqePJLDQWRwd/dcA6ssjzv8U9ySAkgZasjG/xz65KlLepIY8vy2k66Z6SBJJMlyZb/dznNZUMDM0GCbmsXILyQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -4629,7 +4629,7 @@ snapshots:
     dependencies:
       parse-ms: 2.1.0
 
-  probot@13.3.6:
+  probot@13.3.7:
     dependencies:
       '@octokit/core': 5.2.0
       '@octokit/plugin-enterprise-compatibility': 4.1.0
