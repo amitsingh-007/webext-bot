@@ -50,7 +50,7 @@
     "rimraf": "6.0.1",
     "smee-client": "2.0.2",
     "typescript": "5.5.4",
-    "vercel": "35.2.2"
+    "vercel": "37.6.0"
   },
   "engines": {
     "node": ">= 18"
