@@ -49,7 +49,7 @@
     "eslint-plugin-node": "11.1.0",
     "rimraf": "6.0.1",
     "smee-client": "2.0.4",
-    "typescript": "5.5.4",
+    "typescript": "5.6.3",
     "vercel": "37.11.0"
   },
   "engines": {
