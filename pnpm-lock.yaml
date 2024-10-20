@@ -67,8 +67,8 @@ importers:
         specifier: 6.0.1
         version: 6.0.1
       smee-client:
-        specifier: 2.0.2
-        version: 2.0.2
+        specifier: 2.0.4
+        version: 2.0.4
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -2221,8 +2221,8 @@ packages:
     resolution: {integrity: sha512-MY2/qGx4enyjprQnFaZsHib3Yadh3IXyV2C321GY0pjGfVBu4un0uDJkwgdxqO+Rdx8JMT8IfJIRwbYVz3Ob3Q==}
     engines: {node: '>=14'}
 
-  smee-client@2.0.2:
-    resolution: {integrity: sha512-5j7tlxKnHzZomJ1iK6QYiWK+3g6xPnisHyln1NcNvvoRbVeY7FstYonNkCsUMSnC3pYUE/mfV8OJ8SFiSjBCpA==}
+  smee-client@2.0.4:
+    resolution: {integrity: sha512-RxXCs0mfaxpI8JF4SeTM51XtRiprzW5g20HVt4aTQ36EB+RaN0aj0m/4EbXLGdfPlqahQ09d3UnJYmALN2CbYw==}
     hasBin: true
 
   sonic-boom@4.0.1:
@@ -4945,7 +4945,7 @@ snapshots:
 
   signal-exit@4.0.2: {}
 
-  smee-client@2.0.2:
+  smee-client@2.0.4:
     dependencies:
       commander: 12.0.0
       eventsource: 2.0.2
