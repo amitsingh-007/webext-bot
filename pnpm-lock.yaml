@@ -70,8 +70,8 @@ importers:
         specifier: 2.0.4
         version: 2.0.4
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.7.2
+        version: 5.7.2
       vercel:
         specifier: 39.2.2
         version: 39.2.2
@@ -2497,8 +2497,8 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
 
-  typescript@5.6.3:
-    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
+  typescript@5.7.2:
+    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -5401,7 +5401,7 @@ snapshots:
 
   typescript@4.9.5: {}
 
-  typescript@5.6.3: {}
+  typescript@5.7.2: {}
 
   uid-promise@1.0.0: {}
 
