@@ -31,14 +31,14 @@
     "json2md": "2.0.1",
     "minimatch": "10.0.1",
     "normalize-path": "3.0.0",
-    "probot": "13.3.8",
+    "probot": "13.4.1",
     "semver": "7.6.3",
-    "yaml": "2.6.0",
-    "zod": "3.23.8"
+    "yaml": "2.6.1",
+    "zod": "3.24.1"
   },
   "devDependencies": {
     "@octokit/webhooks-types": "7.6.1",
-    "@types/bytes": "3.1.4",
+    "@types/bytes": "3.1.5",
     "@types/json2md": "1.5.4",
     "@types/minimatch": "5.1.2",
     "@types/normalize-path": "3.0.2",
@@ -49,8 +49,8 @@
     "eslint-plugin-node": "11.1.0",
     "rimraf": "6.0.1",
     "smee-client": "2.0.4",
-    "typescript": "5.6.3",
-    "vercel": "37.11.0"
+    "typescript": "5.7.2",
+    "vercel": "39.2.2"
   },
   "engines": {
     "node": ">= 18"
