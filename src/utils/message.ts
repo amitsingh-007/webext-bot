@@ -17,6 +17,7 @@ const byteOptions: BytesOptions = {
   fixedDecimals: true,
   unitSeparator: " ",
 };
+const formatBytes = (byte: number) => bytes(byte, byteOptions) || "";
 
 export const getExtSizeChangeComment = async (
   currentSize: number,
@@ -29,17 +30,16 @@ export const getExtSizeChangeComment = async (
   return json2md([
     {
       collapsible: {
-        summary: `Extension Size Change: &nbsp ${bytes(
-          sizeDiff,
-          byteOptions
+        summary: `Extension Size Change: &nbsp ${formatBytes(
+          sizeDiff
         )} ${getEmoji(sizeDiff)}`,
         description: json2md({
           table: {
             headers: ["", ""],
             rows: [
               ["Commit", commitId],
-              ["Latest release size", bytes(latestReleaseSize, byteOptions)],
-              ["Current size", bytes(currentSize, byteOptions)],
+              ["Latest release size", formatBytes(latestReleaseSize)],
+              ["Current size", formatBytes(currentSize)],
               ["Percent change", `${percentChange.toFixed(2)} %`],
             ],
           },

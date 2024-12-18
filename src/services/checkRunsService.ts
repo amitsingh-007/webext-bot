@@ -111,7 +111,7 @@ export const createCheckRun = async (
     });
     return {
       checkId: response.data.id,
-      detailsUrl: response.data.html_url,
+      detailsUrl: response.data.html_url || undefined,
     };
   } catch (error) {
     console.log(error);
