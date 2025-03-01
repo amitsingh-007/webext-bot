@@ -67,8 +67,8 @@ importers:
         specifier: 6.0.1
         version: 6.0.1
       smee-client:
-        specifier: 2.0.4
-        version: 2.0.4
+        specifier: 3.0.0
+        version: 3.0.0
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -737,6 +737,10 @@ packages:
     resolution: {integrity: sha512-MwVNWlYjDTtOjX5PiD7o5pK0UrFU/OYgcJfjjK4RaHZETNtjJqrZa9Y9ds88+A+f+d5lv+561eZ+yCKoS3gbAA==}
     engines: {node: '>=18'}
 
+  commander@12.1.0:
+    resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
+    engines: {node: '>=18'}
+
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
@@ -1198,10 +1202,6 @@ packages:
   events@3.3.0:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
-
-  eventsource@2.0.2:
-    resolution: {integrity: sha512-IzUmBGPR3+oUG9dUeXynyNmf91/3zUSJg1lCktzKw47OXuhco54U3r9B7O4XX+Rb1Itm9OZ2b0RkTs10bICOxA==}
-    engines: {node: '>=12.0.0'}
 
   execa@3.2.0:
     resolution: {integrity: sha512-kJJfVbI/lZE1PZYDI5VPxp8zXPO9rtxOkhpZ0jMKha56AI9y2gGVC6bkukStQf0ka5Rh15BA5m7cCCH4jmHqkw==}
@@ -1718,8 +1718,8 @@ packages:
   lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
 
-  lru-cache@11.0.0:
-    resolution: {integrity: sha512-Qv32eSV1RSCfhY3fpPE2GNZ8jgM9X7rdAfemLWqTUxwiyIC4jJ6Sy0fZ8H+oLWevO6i4/bizg7c8d8i6bxrzbA==}
+  lru-cache@11.0.2:
+    resolution: {integrity: sha512-123qHRfJBmo2jXDbo/a5YOQrJoHF/GNQTLzQ5+IdK5pWpceK17yRc6ozlWd25FxvGKQbIUs91fDFkXmDHTKcyA==}
     engines: {node: 20 || >=22}
 
   lru-cache@6.0.0:
@@ -2290,8 +2290,9 @@ packages:
     resolution: {integrity: sha512-MY2/qGx4enyjprQnFaZsHib3Yadh3IXyV2C321GY0pjGfVBu4un0uDJkwgdxqO+Rdx8JMT8IfJIRwbYVz3Ob3Q==}
     engines: {node: '>=14'}
 
-  smee-client@2.0.4:
-    resolution: {integrity: sha512-RxXCs0mfaxpI8JF4SeTM51XtRiprzW5g20HVt4aTQ36EB+RaN0aj0m/4EbXLGdfPlqahQ09d3UnJYmALN2CbYw==}
+  smee-client@3.0.0:
+    resolution: {integrity: sha512-EoyiQ+9cQN+CT5F/KLXmnnIQFU3BlVdedgUxCn8V9q+z1m2XTFeta+KP/tcJn8Ie2CJWxfnsEZkzlJE//CN5gg==}
+    engines: {node: '>=18'}
     hasBin: true
 
   sonic-boom@4.0.1:
@@ -2512,6 +2513,10 @@ packages:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
     engines: {node: '>=14.0'}
 
+  undici@6.21.1:
+    resolution: {integrity: sha512-q/1rj5D0/zayJB2FraXdaWxbhWiNKDvu8naDT2dl1yTlvJp4BLtOcp2a5BvgGNQpYYJzau7tf1WgKv3b+7mqpQ==}
+    engines: {node: '>=18.17'}
+
   universal-github-app-jwt@1.1.2:
     resolution: {integrity: sha512-t1iB2FmLFE+yyJY9+3wMx0ejB+MQpEVkH0gQv7dR6FZyltyq+ZZO0uDpbopxhrZ3SLEO4dCEkIujOMldEQ2iOA==}
 
@@ -2553,8 +2558,8 @@ packages:
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
-  validator@13.11.0:
-    resolution: {integrity: sha512-Ii+sehpSfZy+At5nPdnyMhx78fEoPDkR2XW/zimHEL3MyGJQOCQ7WeP20jPYRz7ZCpcKLB21NxuXHF3bxjStBQ==}
+  validator@13.12.0:
+    resolution: {integrity: sha512-c1Q0mCiPlgdTVVVIJIrBuxNicYE+t/7oKeI9MWLj3fh/uq2Pxh/3eeWbVZ4OcGW1TUf53At0njHw5SMdA3tmMg==}
     engines: {node: '>= 0.10'}
 
   vary@1.1.2:
@@ -3461,6 +3466,8 @@ snapshots:
 
   commander@12.0.0: {}
 
+  commander@12.1.0: {}
+
   concat-map@0.0.1: {}
 
   console-control-strings@1.1.0: {}
@@ -3966,8 +3973,6 @@ snapshots:
   events-intercept@2.0.0: {}
 
   events@3.3.0: {}
-
-  eventsource@2.0.2: {}
 
   execa@3.2.0:
     dependencies:
@@ -4557,7 +4562,7 @@ snapshots:
 
   lodash.once@4.1.1: {}
 
-  lru-cache@11.0.0: {}
+  lru-cache@11.0.2: {}
 
   lru-cache@6.0.0:
     dependencies:
@@ -4813,7 +4818,7 @@ snapshots:
 
   path-scurry@2.0.0:
     dependencies:
-      lru-cache: 11.0.0
+      lru-cache: 11.0.2
       minipass: 7.1.2
 
   path-to-regexp@0.1.10: {}
@@ -5149,11 +5154,11 @@ snapshots:
 
   signal-exit@4.0.2: {}
 
-  smee-client@2.0.4:
+  smee-client@3.0.0:
     dependencies:
-      commander: 12.0.0
-      eventsource: 2.0.2
-      validator: 13.11.0
+      commander: 12.1.0
+      undici: 6.21.1
+      validator: 13.12.0
 
   sonic-boom@4.0.1:
     dependencies:
@@ -5416,6 +5421,8 @@ snapshots:
     dependencies:
       '@fastify/busboy': 2.1.0
 
+  undici@6.21.1: {}
+
   universal-github-app-jwt@1.1.2:
     dependencies:
       '@types/jsonwebtoken': 9.0.6
@@ -5445,7 +5452,7 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  validator@13.11.0: {}
+  validator@13.12.0: {}
 
   vary@1.1.2: {}
 
