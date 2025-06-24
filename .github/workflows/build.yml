@@ -33,6 +33,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Add pending status check
+        uses: myrotvorets/set-commit-status-action@v2
+        with:
+          status: pending
+
       - name: Deploy (Vercel)
         uses: amondnet/vercel-action@v25
         with:
@@ -41,11 +46,8 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
           github-comment: false
 
-      - name: Add status check
-        uses: LouisBrunner/checks-action@v2.0.0
+      - name: Set final status check
+        uses: myrotvorets/set-commit-status-action@v2
         if: always()
         with:
-          token: ${{ github.token }}
-          sha: ${{ steps.sharef.outputs.sha }}
-          name: Build Check
-          conclusion: ${{ job.status }}
+          status: ${{ job.status }}
