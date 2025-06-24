@@ -1,17 +1,20 @@
-import bytes from "bytes";
-import { Context } from "probot";
-import { CHECK_NAME } from "../constants";
-import { ICheckOutput, ICreateCheckOutput } from "../interfaces/github";
-import { getEmoji, getExtSizeChangeComment } from "../utils/message";
+import bytes from 'bytes';
+import { type Context } from 'probot';
+import { CHECK_NAME } from '../constants';
+import {
+  type ICheckOutput,
+  type ICreateCheckOutput,
+} from '../interfaces/github';
+import { getEmoji, getExtSizeChangeComment } from '../utils/message';
 import {
   fetchCurrentArtifactSize,
   fetchLatestReleaseExtensionSize,
-} from "../utils/fetch";
-import { commentOnPullRequests } from "./commentService";
-import { IConfig } from "../constants/config";
+} from '../utils/fetch';
+import { type IConfig } from '../constants/config';
+import { commentOnPullRequests } from './commentService';
 
 const updateCheck = async (
-  context: Context<"workflow_run.completed">,
+  context: Context<'workflow_run.completed'>,
   check: ICreateCheckOutput,
   checkOutput: ICheckOutput
 ) => {
@@ -24,7 +27,7 @@ const updateCheck = async (
       check_run_id: check.checkId,
       name: CHECK_NAME,
       head_sha: workflow_run.head_commit.id,
-      status: "completed",
+      status: 'completed',
       conclusion: checkOutput.conclusion,
       completed_at: new Date().toISOString(),
       details_url: check.detailsUrl,
@@ -39,7 +42,7 @@ const updateCheck = async (
 };
 
 export const addChecksAndComment = async (
-  context: Context<"workflow_run.completed">,
+  context: Context<'workflow_run.completed'>,
   req: {
     headSha: string;
     check: ICreateCheckOutput;
@@ -54,12 +57,16 @@ export const addChecksAndComment = async (
     config.workflow.artifact
   );
   if (!currentExtSize) {
-    return context.log.info("Current extension size not found");
+    context.log.info('Current extension size not found');
+    return;
   }
+
   const latestReleaseExtSize = await fetchLatestReleaseExtensionSize(context);
   if (!latestReleaseExtSize) {
-    return context.log.info("Latest extension size not found");
+    context.log.info('Latest extension size not found');
+    return;
   }
+
   const actualSizeDiff = currentExtSize - latestReleaseExtSize;
   const absoluteSizeDiff = Math.abs(actualSizeDiff);
   const message = await getExtSizeChangeComment(
@@ -67,11 +74,12 @@ export const addChecksAndComment = async (
     latestReleaseExtSize,
     headSha
   );
-  if (absoluteSizeDiff >= config["comment-threshold"]) {
+  if (absoluteSizeDiff >= config['comment-threshold']) {
     await commentOnPullRequests(context, message);
   }
+
   await updateCheck(context, check, {
-    conclusion: "success",
+    conclusion: 'success',
     title: `Total size difference: ${bytes(absoluteSizeDiff)} ${getEmoji(
       actualSizeDiff
     )}`,
@@ -80,21 +88,21 @@ export const addChecksAndComment = async (
 };
 
 export const addFailedCheck = async (
-  context: Context<"workflow_run.completed">,
+  context: Context<'workflow_run.completed'>,
   check: ICreateCheckOutput
 ) => {
   await updateCheck(context, check, {
-    conclusion: "failure",
-    title: "Build faild. Make sure your CI build is passing.",
+    conclusion: 'failure',
+    title: 'Build faild. Make sure your CI build is passing.',
     message:
-      "Your CI build failed. Please check and make sure it passes. If CI build passes then only this check is executed.",
+      'Your CI build failed. Please check and make sure it passes. If CI build passes then only this check is executed.',
   });
 };
 
 export const createCheckRun = async (
-  context: Context<"workflow_run.completed">,
+  context: Context<'workflow_run.completed'>,
   commitId: string
-): Promise<ICreateCheckOutput | null> => {
+): Promise<ICreateCheckOutput | undefined> => {
   try {
     const { repository } = context.payload;
     const response = await context.octokit.checks.create({
@@ -102,19 +110,19 @@ export const createCheckRun = async (
       repo: repository.name,
       name: CHECK_NAME,
       head_sha: commitId,
-      status: "in_progress",
+      status: 'in_progress',
       started_at: new Date().toISOString(),
       output: {
-        title: "Check is in progress",
-        summary: "Waiting...",
+        title: 'Check is in progress',
+        summary: 'Waiting...',
       },
     });
     return {
       checkId: response.data.id,
-      detailsUrl: response.data.html_url,
+      detailsUrl: response.data.html_url ?? undefined,
     };
   } catch (error) {
     console.log(error);
-    return null;
+    return undefined;
   }
 };

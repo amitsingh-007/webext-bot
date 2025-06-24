@@ -1,17 +1,55 @@
-import { Context } from "probot";
-import YAML from "yaml";
-import { ConfigSchema } from "../constants/config";
+import path from 'node:path';
+import { type ProbotOctokit, type Context } from 'probot';
+import YAML from 'yaml';
+import normalize from 'normalize-path';
+import {
+  ConfigSchema,
+  ManifestSchema,
+  type IConfig,
+} from '../constants/config';
+
+const extractFile = (
+  data: Awaited<ReturnType<ProbotOctokit['repos']['getContent']>>['data']
+) => {
+  if (!Array.isArray(data)) {
+    if (data.type !== 'file') {
+      return undefined;
+    }
+
+    return {
+      content: data.content,
+      encoding: data.encoding,
+    };
+  }
+
+  const file = data.find((item) => item.type === 'file');
+  if (!file) {
+    return undefined;
+  }
+
+  return {
+    content: file.content ?? '',
+    encoding: 'encoding' in file ? (file.encoding as string) : 'utf8',
+  };
+};
 
 export const fetchFile = async (
   context: Context,
   path: string,
   ref?: string
-) => {
+): Promise<unknown> => {
   try {
     const params = context.repo({ path, ref });
     const response = await context.octokit.repos.getContent(params);
-    const { content, encoding } = response.data as any;
-    const decodedContent = Buffer.from(content, encoding).toString();
+
+    const file = extractFile(response.data);
+    if (!file) {
+      return null;
+    }
+
+    // @ts-expect-error adasd
+    // eslint-disable-next-line n/prefer-global/buffer
+    const decodedContent = Buffer.from(file.content, file.encoding).toString();
     return YAML.parse(decodedContent);
   } catch (error: any) {
     context.log.info(error);
@@ -20,12 +58,25 @@ export const fetchFile = async (
 };
 
 export const fetchConfig = async (context: Context, commitId?: string) => {
-  const response = await fetchFile(context, ".github/webext.yml", commitId);
+  const response = await fetchFile(context, '.github/webext.yml', commitId);
   return ConfigSchema.parse(response);
 };
 
+export const fetchManifest = async (
+  context: Context,
+  config: IConfig,
+  commitId?: string
+) => {
+  const { manifest } = config;
+  const manifestFilePath = normalize(
+    path.normalize(path.join(manifest.dir, manifest.name))
+  );
+  const response = await fetchFile(context, manifestFilePath, commitId);
+  return ManifestSchema.parse(response);
+};
+
 export const fetchCurrentArtifactSize = async (
-  context: Context<"workflow_run.completed">,
+  context: Context<'workflow_run.completed'>,
   workflowRunId: number,
   artifactName: string
 ): Promise<number | undefined> => {
@@ -42,15 +93,16 @@ export const fetchCurrentArtifactSize = async (
 };
 
 export const fetchLatestReleaseExtensionSize = async (
-  context: Context<"workflow_run.completed">
+  context: Context<'workflow_run.completed'>
 ) => {
   try {
     const { octokit } = context;
     const params = context.repo({});
     const res = await octokit.repos.getLatestRelease(params);
-    if (!res || !res.data || !res.data.assets) {
+    if (!res?.data?.assets) {
       return null;
     }
+
     const [latestReleasedExtension] = res.data.assets;
     return latestReleasedExtension ? latestReleasedExtension.size : null;
   } catch (error: any) {

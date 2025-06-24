@@ -1,18 +1,18 @@
-import { shouldSkipWorkflow, shouldIgnoreBranch } from "./utils/validate";
-import { Probot } from "probot";
+import { type Probot, type Context } from 'probot';
+import { shouldSkipWorkflow, shouldIgnoreBranch } from './utils/validate';
 import {
   addChecksAndComment,
   addFailedCheck,
   createCheckRun,
-} from "./services/checkRunsService";
-import { addAssignees } from "./services/issueService";
-import { fetchConfig } from "./utils/fetch";
-import { processPullRequest } from "./services/pullRequestService";
+} from './services/checkRunsService';
+import { addAssignees } from './services/issueService';
+import { fetchConfig } from './utils/fetch';
+import { processPullRequest } from './services/pullRequestService';
 
 const probotApp = (app: Probot) => {
-  app.log.info("App started.");
+  app.log.info('App started.');
 
-  app.on("workflow_run.completed", async (context) => {
+  app.on('workflow_run.completed', async (context) => {
     try {
       const { workflow, workflow_run } = context.payload;
       const { head_commit } = workflow_run;
@@ -20,11 +20,14 @@ const probotApp = (app: Probot) => {
       if (shouldSkipWorkflow(workflow, workflow_run, config)) {
         return;
       }
+
       const check = await createCheckRun(context, head_commit.id);
       if (!check) return;
-      if (workflow_run.conclusion !== "success") {
-        return await addFailedCheck(context, check);
+      if (workflow_run.conclusion !== 'success') {
+        await addFailedCheck(context, check);
+        return;
       }
+
       await addChecksAndComment(context, {
         headSha: head_commit.id,
         check,
@@ -35,7 +38,7 @@ const probotApp = (app: Probot) => {
     }
   });
 
-  app.on("pull_request.synchronize", async (context) => {
+  app.on('pull_request.synchronize', async (context) => {
     try {
       const { before, after, pull_request } = context.payload;
       await processPullRequest(context, {
@@ -49,7 +52,7 @@ const probotApp = (app: Probot) => {
     }
   });
 
-  app.on("pull_request.opened", async (context) => {
+  app.on('pull_request.opened', async (context) => {
     try {
       const { pull_request } = context.payload;
       const { number, head, base } = pull_request;
@@ -68,7 +71,7 @@ const probotApp = (app: Probot) => {
     }
   });
 
-  app.on("issues.opened", async (context) => {
+  app.on('issues.opened', async (context) => {
     try {
       const config = await fetchConfig(context);
       await addAssignees(context, config, context.payload.issue.number);
