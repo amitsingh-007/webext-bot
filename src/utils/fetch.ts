@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { Buffer } from 'node:buffer';
 import { type ProbotOctokit, type Context } from 'probot';
 import YAML from 'yaml';
 import normalize from 'normalize-path';
@@ -29,7 +30,7 @@ const extractFile = (
 
   return {
     content: file.content ?? '',
-    encoding: 'encoding' in file ? (file.encoding as string) : 'utf8',
+    encoding: 'encoding' in file ? file.encoding : 'base64',
   };
 };
 
@@ -47,9 +48,10 @@ export const fetchFile = async (
       return null;
     }
 
-    // @ts-expect-error adasd
-    // eslint-disable-next-line n/prefer-global/buffer
-    const decodedContent = Buffer.from(file.content, file.encoding).toString();
+    const decodedContent = Buffer.from(
+      file.content,
+      file.encoding as BufferEncoding
+    ).toString();
     return YAML.parse(decodedContent);
   } catch (error: any) {
     context.log.info(error);
