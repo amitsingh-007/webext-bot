@@ -15,7 +15,7 @@
   "scripts": {
     "dist": "pnpm lint && pnpm clean && tsc -p tsconfig.dev.json",
     "clean": "rimraf dist",
-    "lint": "eslint .",
+    "lint": "xo",
     "simulate:issues.opened": "pnpm dist && probot receive -e issues -p ./test/fixtures/issues.opened.json ./dist/src/app.js",
     "simulate:pull_request.opened": "pnpm dist && probot receive -e pull_request -p ./test/fixtures/pull_request.opened.json ./dist/src/app.js",
     "simulate:pull_request.synchronize": "pnpm dist && probot receive -e pull_request -p ./test/fixtures/pull_request.synchronize.json ./dist/src/app.js",
@@ -43,16 +43,14 @@
     "@types/minimatch": "5.1.2",
     "@types/normalize-path": "3.0.2",
     "@types/semver": "7.7.0",
-    "eslint": "8.57.1",
-    "eslint-import-resolver-node": "0.3.9",
-    "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-node": "11.1.0",
     "rimraf": "6.0.1",
     "smee-client": "2.0.4",
+    "tslib": "2.8.1",
     "typescript": "5.8.3",
-    "vercel": "44.1.0"
+    "vercel": "44.1.0",
+    "xo": "1.0.5"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 22"
   }
 }

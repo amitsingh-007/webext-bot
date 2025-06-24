@@ -1,7 +1,7 @@
-import { Context } from "probot";
+import { type Context } from 'probot';
 
 export const commentOnPullRequest = async (
-  context: Context<"workflow_run" | "pull_request">,
+  context: Context<'workflow_run' | 'pull_request'>,
   message: string,
   prNumber: number
 ) => {
@@ -11,13 +11,13 @@ export const commentOnPullRequest = async (
       issue_number: prNumber,
     });
     await context.octokit.issues.createComment(params);
-  } catch (err: any) {
-    context.log.info(err);
+  } catch (error: any) {
+    context.log.info(error);
   }
 };
 
 export const commentOnPullRequests = async (
-  context: Context<"workflow_run.completed">,
+  context: Context<'workflow_run.completed'>,
   message: string
 ) => {
   try {
@@ -26,10 +26,11 @@ export const commentOnPullRequests = async (
     if (!pullRequests) {
       return;
     }
+
     pullRequests.forEach(async (pullRequest) => {
-      await commentOnPullRequest(context as any, message, pullRequest.number);
+      await commentOnPullRequest(context, message, pullRequest.number);
     });
-  } catch (err: any) {
-    context.log.info(err);
+  } catch (error: any) {
+    context.log.info(error);
   }
 };

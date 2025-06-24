@@ -1,5 +1,5 @@
-import { Context } from "probot";
-import { IConfig } from "../constants/config";
+import { type Context } from 'probot';
+import { type IConfig } from '../constants/config';
 
 export const addAssignees = async (
   context: Context,
@@ -7,16 +7,17 @@ export const addAssignees = async (
   number: number
 ) => {
   try {
-    const assignees = config["auto-assign"];
+    const assignees = config['auto-assign'];
     if (!assignees?.length) {
       return;
     }
+
     const params = context.issue({
       issue_number: number,
       assignees,
     });
     await context.octokit.issues.addAssignees(params);
-  } catch (err: any) {
-    context.log.info(err);
+  } catch (error: any) {
+    context.log.info(error);
   }
 };

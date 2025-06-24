@@ -1,1 +1,1 @@
-export const CHECK_NAME = "Web Ext";
+export const CHECK_NAME = 'Web Ext';

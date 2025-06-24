@@ -1,10 +1,8 @@
-import { Context } from "probot";
-import semver from "semver";
-import { commentOnPullRequest } from "./commentService";
-import { fetchConfig, fetchFile } from "../utils/fetch";
-import path from "path";
-import normalize from "normalize-path";
-import { isValidVersion, shouldIgnoreBranch } from "../utils/validate";
+import { type Context } from 'probot';
+import semver from 'semver';
+import { fetchConfig, fetchFile, fetchManifest } from '../utils/fetch';
+import { isValidVersion, shouldIgnoreBranch } from '../utils/validate';
+import { commentOnPullRequest } from './commentService';
 
 const failMessage = `
 Please check the extension version in the manifest.
@@ -12,7 +10,7 @@ Please check the extension version in the manifest.
 * Check the version format.`;
 
 export const processPullRequest = async (
-  context: Context<"pull_request">,
+  context: Context<'pull_request'>,
   req: {
     afterSha: string;
     beforeSha: string;
@@ -21,33 +19,23 @@ export const processPullRequest = async (
   }
 ) => {
   const { afterSha, beforeSha, prNumber, branch } = req;
-  const config = await fetchConfig(context as any, afterSha);
+  const config = await fetchConfig(context, afterSha);
   if (shouldIgnoreBranch(config, branch)) {
     return;
   }
-  const { manifest } = config;
-  const manifestFilePath = normalize(
-    path.normalize(path.join(manifest.dir, manifest.name))
-  );
-  const currentManifest = await fetchFile(
-    context as any,
-    manifestFilePath,
-    afterSha
-  );
-  const latestReleaseManifest = await fetchFile(
-    context as any,
-    manifestFilePath,
-    beforeSha
-  );
+
+  const currentManifest = await fetchManifest(context, config, afterSha);
+  const latestReleaseManifest = await fetchManifest(context, config, beforeSha);
   const oldVersion = latestReleaseManifest.version;
   const newVersion = currentManifest.version;
   if (!isValidVersion(oldVersion, newVersion)) {
-    await commentOnPullRequest(context as any, failMessage, prNumber);
+    await commentOnPullRequest(context, failMessage, prNumber);
     return;
   }
+
   if (semver.gt(newVersion, oldVersion)) {
     await commentOnPullRequest(
-      context as any,
+      context,
       `Extension version is updated from \`${oldVersion}\` to \`${newVersion}\``,
       prNumber
     );
