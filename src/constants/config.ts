@@ -1,10 +1,10 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ConfigSchema = z
   .object({
-    "branches-ignore": z.string().array().default([]),
-    "comment-threshold": z.number().default(0),
-    "auto-assign": z.string().array().optional(),
+    'branches-ignore': z.string().array().default([]),
+    'comment-threshold': z.number().default(0),
+    'auto-assign': z.string().array().optional(),
     manifest: z
       .object({
         name: z.string(),
@@ -19,5 +19,9 @@ export const ConfigSchema = z
       .strict(),
   })
   .strict();
-
 export type IConfig = z.infer<typeof ConfigSchema>;
+
+export const ManifestSchema = z.object({
+  version: z.string(),
+});
+export type IManifest = z.infer<typeof ManifestSchema>;

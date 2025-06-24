@@ -1,5 +1,5 @@
-import bytes, { BytesOptions } from "bytes";
-import json2md from "json2md";
+import bytes, { type BytesOptions } from 'bytes';
+import json2md from 'json2md';
 
 json2md.converters.collapsible = (input: {
   summary: string;
@@ -15,9 +15,9 @@ ${input.description}
 const byteOptions: BytesOptions = {
   decimalPlaces: 2,
   fixedDecimals: true,
-  unitSeparator: " ",
+  unitSeparator: ' ',
 };
-const formatBytes = (byte: number) => bytes(byte, byteOptions) || "";
+const formatBytes = (byte: number) => bytes(byte, byteOptions) ?? '';
 
 export const getExtSizeChangeComment = async (
   currentSize: number,
@@ -35,33 +35,35 @@ export const getExtSizeChangeComment = async (
         )} ${getEmoji(sizeDiff)}`,
         description: json2md({
           table: {
-            headers: ["", ""],
+            headers: ['', ''],
             rows: [
-              ["Commit", commitId],
-              ["Latest release size", formatBytes(latestReleaseSize)],
-              ["Current size", formatBytes(currentSize)],
-              ["Percent change", `${percentChange.toFixed(2)} %`],
+              ['Commit', commitId],
+              ['Latest release size', formatBytes(latestReleaseSize)],
+              ['Current size', formatBytes(currentSize)],
+              ['Percent change', `${percentChange.toFixed(2)} %`],
             ],
           },
         }),
       },
     },
-    { hr: "" },
+    { hr: '' },
     {
       h4:
-        sizeDiff > 10 * 1024 //10KB
-          ? "Significant size increase in this commit ⚠️"
-          : "This commit looks good, cheers 👏",
+        sizeDiff > 10 * 1024 // 10KB
+          ? 'Significant size increase in this commit ⚠️'
+          : 'This commit looks good, cheers 👏',
     },
   ]);
 };
 
 export const getEmoji = (sizeDiff: number) => {
   if (sizeDiff > 0) {
-    return "🔺";
+    return '🔺';
   }
+
   if (sizeDiff < 0) {
-    return "✅";
+    return '✅';
   }
-  return "0️⃣";
+
+  return '0️⃣';
 };

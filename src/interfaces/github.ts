@@ -1,7 +1,7 @@
 export interface ICheckOutput {
   title: string;
   message: string;
-  conclusion: "success" | "failure";
+  conclusion: 'success' | 'failure';
 }
 
 export interface ICreateCheckOutput {
