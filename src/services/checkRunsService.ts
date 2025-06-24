@@ -93,7 +93,7 @@ export const addFailedCheck = async (
 ) => {
   await updateCheck(context, check, {
     conclusion: 'failure',
-    title: 'Build faild. Make sure your CI build is passing.',
+    title: 'Build failed. Make sure your CI build is passing.',
     message:
       'Your CI build failed. Please check and make sure it passes. If CI build passes then only this check is executed.',
   });

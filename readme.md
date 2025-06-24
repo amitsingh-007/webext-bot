@@ -39,7 +39,7 @@
 
 If you have suggestions for how webext-bot could be improved, or want to report a bug, open an issue!
 
-Please check [contibuting.md](https://github.com/amitsingh-007/webext-bot/blob/main/contributing.md) to get started.
+Please check [contributing.md](https://github.com/amitsingh-007/webext-bot/blob/main/contributing.md) to get started.
 
 ## License
 
