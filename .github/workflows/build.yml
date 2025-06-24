@@ -10,25 +10,6 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
-      - name: Recognize sha ref
-        id: sharef
-        run: |
-          if [ "$EVENT" == 'pull_request' ]
-          then
-            echo "::set-output name=sha::$(echo ${{github.event.pull_request.head.sha}})"
-          elif [ "$EVENT" == 'workflow_run' ]
-          then
-          echo "::set-output name=sha::$(echo ${{github.event.workflow_run.head_sha}})"
-          elif [ "$EVENT" == 'workflow_dispatch' ]
-          then
-            echo "::set-output name=sha::$(echo ${{github.event.workflow_dispatch.head_sha}})"
-          else
-            echo "::set-output name=sha::$(echo $GITHUB_SHA)"
-          fi
-        env:
-          EVENT: ${{ github.event_name }}
-          REF: ${{ github.ref }}
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -36,7 +17,7 @@ jobs:
         uses: myrotvorets/set-commit-status-action@v2.0.1
         with:
           status: pending
-          sha: ${{ steps.sharef.outputs.sha }}
+          sha: ${{ github.sha }}
 
       - name: Deploy (Vercel)
         uses: amondnet/vercel-action@v25
@@ -51,4 +32,4 @@ jobs:
         if: always()
         with:
           status: ${{ job.status }}
-          sha: ${{ steps.sharef.outputs.sha }}
+          sha: ${{ github.sha }}
