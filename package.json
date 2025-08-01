@@ -47,7 +47,7 @@
     "rimraf": "6.0.1",
     "smee-client": "4.3.1",
     "typescript": "5.8.3",
-    "vercel": "44.2.0",
+    "vercel": "44.6.6",
     "xo": "1.1.1"
   },
   "engines": {
