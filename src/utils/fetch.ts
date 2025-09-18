@@ -10,7 +10,9 @@ import {
 } from '../constants/config';
 
 const extractFile = (
-  data: Awaited<ReturnType<ProbotOctokit['repos']['getContent']>>['data']
+  data: Awaited<
+    ReturnType<ProbotOctokit['rest']['repos']['getContent']>
+  >['data']
 ) => {
   if (!Array.isArray(data)) {
     if (data.type !== 'file') {
@@ -35,13 +37,13 @@ const extractFile = (
 };
 
 export const fetchFile = async (
-  context: Context,
+  ctx: Context,
   path: string,
   ref?: string
 ): Promise<unknown> => {
   try {
-    const params = context.repo({ path, ref });
-    const response = await context.octokit.repos.getContent(params);
+    const params = ctx.repo({ path, ref });
+    const response = await ctx.octokit.rest.repos.getContent(params);
 
     const file = extractFile(response.data);
     if (!file) {
@@ -54,7 +56,7 @@ export const fetchFile = async (
     ).toString();
     return YAML.parse(decodedContent);
   } catch (error: any) {
-    context.log.info(error);
+    ctx.log.info(error);
     return null;
   }
 };
@@ -78,12 +80,12 @@ export const fetchManifest = async (
 };
 
 export const fetchCurrentArtifactSize = async (
-  context: Context<'workflow_run.completed'>,
+  ctx: Context<'workflow_run.completed'>,
   workflowRunId: number,
   artifactName: string
 ): Promise<number | undefined> => {
-  const { repository } = context.payload;
-  const { data } = await context.octokit.actions.listWorkflowRunArtifacts({
+  const { repository } = ctx.payload;
+  const { data } = await ctx.octokit.rest.actions.listWorkflowRunArtifacts({
     owner: repository.owner.login,
     repo: repository.name,
     run_id: workflowRunId,
@@ -95,12 +97,12 @@ export const fetchCurrentArtifactSize = async (
 };
 
 export const fetchLatestReleaseExtensionSize = async (
-  context: Context<'workflow_run.completed'>
+  ctx: Context<'workflow_run.completed'>
 ) => {
   try {
-    const { octokit } = context;
-    const params = context.repo({});
-    const res = await octokit.repos.getLatestRelease(params);
+    const { octokit } = ctx;
+    const params = ctx.repo({});
+    const res = await octokit.rest.repos.getLatestRelease(params);
     if (!res?.data?.assets) {
       return null;
     }
@@ -108,7 +110,7 @@ export const fetchLatestReleaseExtensionSize = async (
     const [latestReleasedExtension] = res.data.assets;
     return latestReleasedExtension ? latestReleasedExtension.size : null;
   } catch (error: any) {
-    context.log.info(error);
+    ctx.log.info(error);
     return null;
   }
 };

@@ -2,7 +2,7 @@ import { type Context } from 'probot';
 import { type IConfig } from '../constants/config';
 
 export const addAssignees = async (
-  context: Context,
+  ctx: Context,
   config: IConfig,
   number: number
 ) => {
@@ -12,12 +12,12 @@ export const addAssignees = async (
       return;
     }
 
-    const params = context.issue({
+    const params = ctx.issue({
       issue_number: number,
       assignees,
     });
-    await context.octokit.issues.addAssignees(params);
+    await ctx.octokit.rest.issues.addAssignees(params);
   } catch (error: any) {
-    context.log.info(error);
+    ctx.log.info(error);
   }
 };
