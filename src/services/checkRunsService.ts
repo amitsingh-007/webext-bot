@@ -14,14 +14,14 @@ import { type IConfig } from '../constants/config';
 import { commentOnPullRequests } from './commentService';
 
 const updateCheck = async (
-  context: Context<'workflow_run.completed'>,
+  ctx: Context<'workflow_run.completed'>,
   check: ICreateCheckOutput,
   checkOutput: ICheckOutput
 ) => {
-  const { payload } = context;
+  const { payload } = ctx;
   const { repository, workflow_run } = payload;
   try {
-    await context.octokit.checks.update({
+    await ctx.octokit.rest.checks.update({
       owner: repository.owner.login,
       repo: repository.name,
       check_run_id: check.checkId,
@@ -100,12 +100,12 @@ export const addFailedCheck = async (
 };
 
 export const createCheckRun = async (
-  context: Context<'workflow_run.completed'>,
+  ctx: Context<'workflow_run.completed'>,
   commitId: string
 ): Promise<ICreateCheckOutput | undefined> => {
   try {
-    const { repository } = context.payload;
-    const response = await context.octokit.checks.create({
+    const { repository } = ctx.payload;
+    const response = await ctx.octokit.rest.checks.create({
       owner: repository.owner.login,
       repo: repository.name,
       name: CHECK_NAME,

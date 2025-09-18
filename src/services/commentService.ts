@@ -1,18 +1,18 @@
 import { type Context } from 'probot';
 
 export const commentOnPullRequest = async (
-  context: Context<'workflow_run' | 'pull_request'>,
+  ctx: Context<'workflow_run' | 'pull_request'>,
   message: string,
   prNumber: number
 ) => {
   try {
-    const params = context.issue({
+    const params = ctx.issue({
       body: message,
       issue_number: prNumber,
     });
-    await context.octokit.issues.createComment(params);
+    await ctx.octokit.rest.issues.createComment(params);
   } catch (error: any) {
-    context.log.info(error);
+    ctx.log.info(error);
   }
 };
 
@@ -28,7 +28,9 @@ export const commentOnPullRequests = async (
     }
 
     pullRequests.forEach(async (pullRequest) => {
-      await commentOnPullRequest(context, message, pullRequest.number);
+      if (pullRequest?.number) {
+        await commentOnPullRequest(context, message, pullRequest.number);
+      }
     });
   } catch (error: any) {
     context.log.info(error);

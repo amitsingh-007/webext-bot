@@ -10,6 +10,7 @@ const xoConfig: FlatXoConfig = [
       'import-x/extensions': 'off',
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+      '@typescript-eslint/no-restricted-types': 'off',
       'unicorn/prevent-abbreviations': 'off',
       'unicorn/filename-case': 'off',
       'unicorn/no-array-for-each': 'off',
