@@ -15,11 +15,10 @@
   ],
   "scripts": {
     "dist": "pnpm build",
-    "build": "pnpm typecheck && pnpm clean && pnpm build:bundle",
-    "typecheck": "tsc --noEmit",
+    "build": "pnpm lint && pnpm clean && pnpm build:bundle",
+    "lint": "xo && tsc --noEmit",
     "build:bundle": "ncc build src/app.ts -o dist/app --source-map --minify --target es2022 --license licenses.txt",
     "clean": "rimraf dist",
-    "lint": "xo",
     "simulate:issues.opened": "pnpm dist && GITHUB_EVENT_NAME=issues GITHUB_EVENT_PATH=./test/fixtures/issues.opened.json probot receive ./dist/app/index.js",
     "simulate:pull_request.opened": "pnpm dist && GITHUB_EVENT_NAME=pull_request GITHUB_EVENT_PATH=./test/fixtures/pull_request.opened.json probot receive ./dist/app/index.js",
     "simulate:pull_request.synchronize": "pnpm dist && GITHUB_EVENT_NAME=pull_request GITHUB_EVENT_PATH=./test/fixtures/pull_request.synchronize.json probot receive ./dist/app/index.js",
