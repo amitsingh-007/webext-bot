@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "target": "ESNext",
     "lib": ["ESNext"],
     "sourceMap": true,
+    "moduleResolution": "bundler",
     "outDir": "./dist",
     "checkJs": true,
     "strict": true,
@@ -11,7 +12,6 @@
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "importHelpers": true,
-    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
