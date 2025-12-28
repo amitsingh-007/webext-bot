@@ -16,6 +16,9 @@ const xoConfig: FlatXoConfig = [
       'unicorn/no-array-for-each': 'off',
     },
   },
+  {
+    ignores: ['api/github/webhooks.ts', '**/*.js', 'node_modules'],
+  },
 ];
 
 export default xoConfig;
