@@ -37,8 +37,8 @@ importers:
         version: 4.1.9
     devDependencies:
       '@octokit/openapi-webhooks-types':
-        specifier: 12.0.3
-        version: 12.0.3
+        specifier: 12.1.0
+        version: 12.1.0
       '@types/bytes':
         specifier: 3.1.5
         version: 3.1.5
@@ -287,6 +287,9 @@ packages:
 
   '@octokit/openapi-webhooks-types@12.0.3':
     resolution: {integrity: sha512-90MF5LVHjBedwoHyJsgmaFhEN1uzXyBDRLEBe7jlTYx/fEhPAk3P3DAJsfZwC54m8hAIryosJOL+UuZHB3K3yA==}
+
+  '@octokit/openapi-webhooks-types@12.1.0':
+    resolution: {integrity: sha512-WiuzhOsiOvb7W3Pvmhf8d2C6qaLHXrWiLBP4nJ/4kydu+wpagV5Fkz9RfQwV2afYzv3PB+3xYgp4mAdNGjDprA==}
 
   '@octokit/plugin-enterprise-compatibility@6.0.1':
     resolution: {integrity: sha512-JAYyZf3nfUZPn6XbUsrocdTvzWSRqpXj3v5FmkZumeS5Chs7FXb7P9/oiWBvvjs6rINhq5YeW88OzLJ/DUwpnA==}
@@ -2502,8 +2505,8 @@ packages:
   resolve-pkg-maps@1.0.0:
     resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
 
-  resolve@1.22.10:
-    resolution: {integrity: sha512-NPRy+/ncIMeDlTAsuqwKIiferiawhefFJtkNSW0qZJEqMEb+qBt/77B/jGeeek+F0uOeN05CDa6HXbbIgtVX4w==}
+  resolve@1.22.11:
+    resolution: {integrity: sha512-RfqAvLnMl313r7c9oclB1HhUEAezcpLjz95wFH4LVuhk9JF/r22qmVP9AMmOU4vMX7Q8pN8jwNg/CSpdFnMjTQ==}
     engines: {node: '>= 0.4'}
     hasBin: true
 
@@ -3264,6 +3267,8 @@ snapshots:
   '@octokit/openapi-types@26.0.0': {}
 
   '@octokit/openapi-webhooks-types@12.0.3': {}
+
+  '@octokit/openapi-webhooks-types@12.1.0': {}
 
   '@octokit/plugin-enterprise-compatibility@6.0.1':
     dependencies:
@@ -4404,7 +4409,7 @@ snapshots:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.16.1
-      resolve: 1.22.10
+      resolve: 1.22.11
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -5639,7 +5644,7 @@ snapshots:
 
   resolve-pkg-maps@1.0.0: {}
 
-  resolve@1.22.10:
+  resolve@1.22.11:
     dependencies:
       is-core-module: 2.16.1
       path-parse: 1.0.7
