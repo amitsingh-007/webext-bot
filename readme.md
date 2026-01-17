@@ -43,4 +43,4 @@ Please check [contributing.md](https://github.com/amitsingh-007/webext-bot/blob/
 
 ## License
 
-[ISC](LICENSE) © 2021 Amit Singh <amitsingh5198@gmail.com>
+[MIT](licence) © 2026 Amit Singh <amitsingh5198@gmail.com>
