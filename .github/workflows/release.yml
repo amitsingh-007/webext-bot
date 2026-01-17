@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Start deployment
         uses: bobheadxi/deployments@v1.5.0
@@ -46,7 +46,7 @@ jobs:
     needs: [Deploy]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Generate Release Tag
         id: release_tag

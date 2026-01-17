@@ -17,7 +17,7 @@ jobs:
           sha: ${{ github.sha }}
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Deploy (Vercel)
         uses: amondnet/vercel-action@v25
