@@ -5,7 +5,7 @@
   "type": "module",
   "description": "An open-source Github Bot to report extension size change and extension version change on pull requests.",
   "author": "Amit Singh <amitsingh5198@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://github.com/amitsingh-007/webext-bot",
   "keywords": [
     "probot",
