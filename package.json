@@ -19,6 +19,7 @@
     "lint": "xo && tsc --noEmit",
     "build:bundle": "ncc build src/app.ts -o dist --source-map --minify --target es2022 --license licenses.txt",
     "clean": "rimraf dist",
+    "test": "vitest run",
     "simulate:issues.opened": "pnpm dist && GITHUB_EVENT_NAME=issues GITHUB_EVENT_PATH=test/fixtures/issues.opened.json probot receive dist/index.js",
     "simulate:pull_request.opened": "pnpm dist && GITHUB_EVENT_NAME=pull_request GITHUB_EVENT_PATH=test/fixtures/pull_request.opened.json probot receive dist/index.js",
     "simulate:pull_request.synchronize": "pnpm dist && GITHUB_EVENT_NAME=pull_request GITHUB_EVENT_PATH=test/fixtures/pull_request.synchronize.json probot receive dist/index.js",
@@ -42,15 +43,18 @@
   },
   "devDependencies": {
     "@octokit/openapi-webhooks-types": "12.0.3",
-    "@vercel/ncc": "0.38.3",
     "@types/bytes": "3.1.5",
     "@types/json2md": "1.5.4",
+    "@types/node": "26.1.1",
     "@types/normalize-path": "3.0.2",
     "@types/semver": "7.7.1",
+    "@vercel/ncc": "0.38.3",
+    "nock": "14.0.16",
     "rimraf": "6.0.1",
     "smee-client": "4.3.1",
     "typescript": "5.8.3",
     "vercel": "48.0.3",
+    "vitest": "3.2.7",
     "xo": "1.2.2"
   },
   "engines": {

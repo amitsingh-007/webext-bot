@@ -1,0 +1,43 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getExtSizeChangeComment > renders a size-decrease comment 1`] = `
+"
+<details>
+<summary>Extension Size Change: &nbsp -9.77 KB ✅</summary>
+</br>
+
+|     |     |
+| --- | --- |
+| Commit | abc123 |
+| Latest release size | 97.66 KB |
+| Current size | 87.89 KB |
+| Percent change | -10.00 % |
+
+</details>
+
+---
+
+#### This commit looks good, cheers 👏
+"
+`;
+
+exports[`getExtSizeChangeComment > renders a size-increase comment 1`] = `
+"
+<details>
+<summary>Extension Size Change: &nbsp 19.53 KB 🔺</summary>
+</br>
+
+|     |     |
+| --- | --- |
+| Commit | abc123 |
+| Latest release size | 97.66 KB |
+| Current size | 117.19 KB |
+| Percent change | 20.00 % |
+
+</details>
+
+---
+
+#### Significant size increase in this commit ⚠️
+"
+`;
