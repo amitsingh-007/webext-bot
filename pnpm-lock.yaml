@@ -58,8 +58,8 @@ importers:
         specifier: 6.1.3
         version: 6.1.3
       smee-client:
-        specifier: 4.3.1
-        version: 4.3.1
+        specifier: 5.0.0
+        version: 5.0.0
       typescript:
         specifier: 5.8.3
         version: 5.8.3
@@ -1801,12 +1801,12 @@ packages:
   events-universal@1.0.1:
     resolution: {integrity: sha512-LUd5euvbMLpwOF8m6ivPCbhQeSiYVNb8Vs0fQ8QjXo0JTkEHpz8pxdQf0gStltaPpw0Cca8b39KxvK9cfKRiAw==}
 
-  eventsource-parser@3.0.2:
-    resolution: {integrity: sha512-6RxOBZ/cYgd8usLwsEl+EC09Au/9BcmCKYF2/xbml6DNczf7nv0MQb+7BA2F+li6//I+28VNlQR37XfQtcAJuA==}
+  eventsource-parser@3.1.0:
+    resolution: {integrity: sha512-kJezFj9YFAMLeORyi7aCLxLbD5/qWMQnoMVlVPyHIll7lgRJCc3JVln9Vgl9nwQi0YkMnhdGTMNn7CkRRAptMg==}
     engines: {node: '>=18.0.0'}
 
-  eventsource@4.0.0:
-    resolution: {integrity: sha512-fvIkb9qZzdMxgZrEQDyll+9oJsyaVvY92I2Re+qK0qEJ+w5s0X3dtz+M0VAPOjP1gtU3iqWyjQ0G3nvd5CLZ2g==}
+  eventsource@4.1.0:
+    resolution: {integrity: sha512-2GuF51iuHX6A9xdTccMTsNb7VO0lHZihApxhvQzJB5A03DvHDd2FQepodbMaztPBmBcE/ox7o2gqaxGhYB9LhQ==}
     engines: {node: '>=20.0.0'}
 
   execa@3.2.0:
@@ -3020,8 +3020,8 @@ packages:
     resolution: {integrity: sha512-ZA6oR3T/pEyuqwMgAKT0/hAv8oAXckzbkmR0UkUosQ+Mc4RxGoJkRmwHgHufaenlyAgE1Mxgpdcrf75y6XcnDg==}
     engines: {node: '>=14.16'}
 
-  smee-client@4.3.1:
-    resolution: {integrity: sha512-4x8Plwtzx/w9N/0TT2tegle6zaDkPnUrPLZUhDt1phUlMMRhlYuSDdEKl0LygZPegsztYd7sWmcYAm8UQ60xQA==}
+  smee-client@5.0.0:
+    resolution: {integrity: sha512-OYL8xPr1Tc0iqGohTGqHO/qEvUrPktK0a2Qcb0Uuj+j4KLnH5bsOhOlmpnmdh4zgzL3OwTfodcmkg5fVgiMUHw==}
     engines: {node: ^20.18 || >= 22}
     hasBin: true
 
@@ -3274,10 +3274,6 @@ packages:
     resolution: {integrity: sha512-YmfV3YnEDzXRC5lZ2jWtWWHKGUm1zIt8AhesR1tens+HTNv+YZlN/dp6G727LOvMJ8xjP9Be7Y2Sdr96LDm+pg==}
     engines: {node: '>=18.17'}
 
-  undici@7.10.0:
-    resolution: {integrity: sha512-u5otvFBOBZvmdjWLVW+5DAc9Nkq8f24g0O9oY7qw2JVIF1VocIFoyz9JFkuVOS2j41AufeO0xnlweJ2RLT8nGw==}
-    engines: {node: '>=20.18.1'}
-
   undici@7.28.0:
     resolution: {integrity: sha512-cRZYrTDwWznlnRiPjggAGxZXanty6M8RV1ff8Wm4LWXBp7/IG8v5DnOm74DtUBp9OONpK75YlPnIjQqX0dBDtA==}
     engines: {node: '>=20.18.1'}
@@ -3311,10 +3307,6 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
-
-  validator@13.15.15:
-    resolution: {integrity: sha512-BgWVbCI72aIQy937xbawcs+hrVaN/CZ2UwutgaJ36hGqRrLNM+f5LUT/YPRbo8IV/ASeFzXszezV+y2+rq3l8A==}
-    engines: {node: '>= 0.10'}
 
   vercel@56.4.0:
     resolution: {integrity: sha512-kBNkguWeUva8l1eD0CkTH8l4yiGW1iymJcWG93YDMmZELJ9wha96eeaZWJKxUiy+wBcza6b+bQ1ympd7wNQPkA==}
@@ -5345,11 +5337,11 @@ snapshots:
     transitivePeerDependencies:
       - bare-abort-controller
 
-  eventsource-parser@3.0.2: {}
+  eventsource-parser@3.1.0: {}
 
-  eventsource@4.0.0:
+  eventsource@4.1.0:
     dependencies:
-      eventsource-parser: 3.0.2
+      eventsource-parser: 3.1.0
 
   execa@3.2.0:
     dependencies:
@@ -6584,11 +6576,10 @@ snapshots:
 
   slash@5.1.0: {}
 
-  smee-client@4.3.1:
+  smee-client@5.0.0:
     dependencies:
-      eventsource: 4.0.0
-      undici: 7.10.0
-      validator: 13.15.15
+      eventsource: 4.1.0
+      undici: 7.28.0
 
   smol-toml@1.5.2: {}
 
@@ -6870,8 +6861,6 @@ snapshots:
 
   undici@6.27.0: {}
 
-  undici@7.10.0: {}
-
   undici@7.28.0: {}
 
   unicorn-magic@0.3.0: {}
@@ -6917,8 +6906,6 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
-
-  validator@13.15.15: {}
 
   vercel@56.4.0(@emnapi/core@1.4.5)(@emnapi/runtime@1.4.5):
     dependencies:
