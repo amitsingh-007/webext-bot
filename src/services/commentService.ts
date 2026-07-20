@@ -21,17 +21,14 @@ export const commentOnPullRequests = async (
   message: string
 ) => {
   try {
-    const { workflow_run } = context.payload;
-    const { pull_requests: pullRequests } = workflow_run;
-    if (!pullRequests) {
-      return;
-    }
+    const { pull_requests: pullRequests } = context.payload.workflow_run;
+    const prNumbers = (pullRequests ?? [])
+      .map((pullRequest) => pullRequest?.number)
+      .filter((number): number is number => number !== undefined);
 
-    pullRequests.forEach(async (pullRequest) => {
-      if (pullRequest?.number) {
-        await commentOnPullRequest(context, message, pullRequest.number);
-      }
-    });
+    await Promise.all(
+      prNumbers.map(async (number) => commentOnPullRequest(context, message, number))
+    );
   } catch (error: any) {
     context.log.info(error);
   }

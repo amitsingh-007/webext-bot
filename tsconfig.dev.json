@@ -5,7 +5,6 @@
     "lib": ["ESNext"],
     "sourceMap": true,
     "moduleResolution": "bundler",
-    "rootDir": "./src",
     "outDir": "./dist",
     "checkJs": true,
     "strict": true,
