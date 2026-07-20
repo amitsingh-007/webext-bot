@@ -2,21 +2,22 @@
   "name": "webext-bot",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "description": "An open-source Github Bot to report extension size change and extension version change on pull requests.",
-  "author": "Amit Singh <amitsingh5198@gmail.com>",
-  "license": "MIT",
-  "homepage": "https://github.com/amitsingh-007/webext-bot",
   "keywords": [
-    "probot",
     "github",
+    "probot",
     "probot-app",
     "webext-bot"
   ],
+  "homepage": "https://github.com/amitsingh-007/webext-bot",
+  "license": "MIT",
+  "author": "Amit Singh <amitsingh5198@gmail.com>",
+  "type": "module",
   "scripts": {
     "dist": "pnpm build",
-    "build": "pnpm lint && pnpm clean && pnpm build:bundle",
-    "lint": "xo && tsc --noEmit",
+    "build": "pnpm lint && pnpm typecheck && pnpm clean && pnpm build:bundle",
+    "lint": "oxfmt && oxlint",
+    "typecheck": "tsc --noEmit",
     "build:bundle": "ncc build src/app.ts -o dist --source-map --minify --target es2022 --license licenses.txt",
     "clean": "rimraf dist",
     "simulate:issues.opened": "pnpm dist && GITHUB_EVENT_NAME=issues GITHUB_EVENT_PATH=test/fixtures/issues.opened.json probot receive dist/index.js",
@@ -42,16 +43,18 @@
   },
   "devDependencies": {
     "@octokit/openapi-webhooks-types": "12.0.3",
-    "@vercel/ncc": "0.38.3",
     "@types/bytes": "3.1.5",
     "@types/json2md": "1.5.4",
     "@types/normalize-path": "3.0.2",
     "@types/semver": "7.7.1",
+    "@vercel/ncc": "0.38.3",
+    "oxfmt": "0.58.0",
+    "oxlint": "1.73.0",
+    "oxlint-tsgolint": "0.24.0",
     "rimraf": "6.0.1",
     "smee-client": "4.3.1",
     "typescript": "5.8.3",
-    "vercel": "48.0.3",
-    "xo": "1.2.2"
+    "vercel": "48.0.3"
   },
   "engines": {
     "node": ">= 24"

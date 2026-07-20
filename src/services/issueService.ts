@@ -1,11 +1,7 @@
 import { type Context } from 'probot';
 import { type IConfig } from '../constants/config';
 
-export const addAssignees = async (
-  ctx: Context,
-  config: IConfig,
-  number: number
-) => {
+export const addAssignees = async (ctx: Context, config: IConfig, number: number) => {
   try {
     const assignees = config['auto-assign'];
     if (!assignees?.length) {

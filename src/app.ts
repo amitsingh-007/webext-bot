@@ -1,10 +1,6 @@
-import { type Probot, type Context } from 'probot';
+import { type Probot } from 'probot';
 import { shouldSkipWorkflow, shouldIgnoreBranch } from './utils/validate';
-import {
-  addChecksAndComment,
-  addFailedCheck,
-  createCheckRun,
-} from './services/checkRunsService';
+import { addChecksAndComment, addFailedCheck, createCheckRun } from './services/checkRunsService';
 import { addAssignees } from './services/issueService';
 import { fetchConfig } from './utils/fetch';
 import { processPullRequest } from './services/pullRequestService';

@@ -9,10 +9,7 @@
       "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ],
+      "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
       "outputCapture": "std"
     },
     {
@@ -23,10 +20,7 @@
       "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ],
+      "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
       "outputCapture": "std"
     },
     {
@@ -37,10 +31,7 @@
       "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ],
+      "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
       "outputCapture": "std"
     },
     {
@@ -51,10 +42,7 @@
       "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**", "**/node_modules/**/*.js"],
       "outFiles": ["${workspaceFolder}/**/*.js", "!**/node_modules/**"],
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ],
+      "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
       "outputCapture": "std"
     }
   ]

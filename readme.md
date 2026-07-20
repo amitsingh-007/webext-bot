@@ -1,4 +1,4 @@
-# webext-bot ![bypass_link_on_32](https://user-images.githubusercontent.com/51703039/212473396-a165495a-2c0e-41b1-abec-5079e46e4a67.png)
+# webext-bot <img src="assets/logo.png" alt="webext-bot logo" width="34" align="center" />
 
 > A GitHub App built with [Probot](https://github.com/probot/probot) which is an open-source Github Bot to report extension size change and extension version change on pull requests.
 

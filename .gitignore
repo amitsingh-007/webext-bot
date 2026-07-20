@@ -3,3 +3,4 @@ node_modules
 test/fixtures/*.json
 .vercel
 dist
+*.tsbuildinfo
