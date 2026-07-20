@@ -25,9 +25,7 @@ describe('ConfigSchema', () => {
   });
 
   it('rejects unknown top-level keys (strict)', () => {
-    expect(() =>
-      ConfigSchema.parse({ ...minimalConfig, unknown: true })
-    ).toThrow();
+    expect(() => ConfigSchema.parse({ ...minimalConfig, unknown: true })).toThrow();
   });
 
   it('rejects unknown keys inside nested manifest/workflow (strict)', () => {

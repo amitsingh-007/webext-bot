@@ -1,15 +1,9 @@
 import bytes from 'bytes';
 import { type Context } from 'probot';
 import { CHECK_NAME } from '../constants';
-import {
-  type ICheckOutput,
-  type ICreateCheckOutput,
-} from '../interfaces/github';
+import { type ICheckOutput, type ICreateCheckOutput } from '../interfaces/github';
 import { getEmoji, getExtSizeChangeComment } from '../utils/message';
-import {
-  fetchCurrentArtifactSize,
-  fetchLatestReleaseExtensionSize,
-} from '../utils/fetch';
+import { fetchCurrentArtifactSize, fetchLatestReleaseExtensionSize } from '../utils/fetch';
 import { type IConfig } from '../constants/config';
 import { commentOnPullRequests } from './commentService';
 
@@ -51,11 +45,7 @@ export const addChecksAndComment = async (
 ) => {
   const { id } = context.payload.workflow_run;
   const { headSha, check, config } = req;
-  const currentExtSize = await fetchCurrentArtifactSize(
-    context,
-    id,
-    config.workflow.artifact
-  );
+  const currentExtSize = await fetchCurrentArtifactSize(context, id, config.workflow.artifact);
   if (!currentExtSize) {
     context.log.info('Current extension size not found');
     return;
@@ -69,20 +59,14 @@ export const addChecksAndComment = async (
 
   const actualSizeDiff = currentExtSize - latestReleaseExtSize;
   const absoluteSizeDiff = Math.abs(actualSizeDiff);
-  const message = await getExtSizeChangeComment(
-    currentExtSize,
-    latestReleaseExtSize,
-    headSha
-  );
+  const message = await getExtSizeChangeComment(currentExtSize, latestReleaseExtSize, headSha);
   if (absoluteSizeDiff >= config['comment-threshold']) {
     await commentOnPullRequests(context, message);
   }
 
   await updateCheck(context, check, {
     conclusion: 'success',
-    title: `Total size difference: ${bytes(absoluteSizeDiff)} ${getEmoji(
-      actualSizeDiff
-    )}`,
+    title: `Total size difference: ${bytes(absoluteSizeDiff)} ${getEmoji(actualSizeDiff)}`,
     message,
   });
 };

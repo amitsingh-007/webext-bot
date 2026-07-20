@@ -1,11 +1,6 @@
 import nock from 'nock';
 import { beforeEach, afterEach, describe, it, expect } from 'vitest';
-import {
-  newProbot,
-  GITHUB_API,
-  contentsPath,
-  configEnvelope,
-} from '../helpers';
+import { newProbot, GITHUB_API, contentsPath, configEnvelope } from '../helpers';
 import { issuesOpened, ISSUE_NUMBER } from '../fixtures/payloads';
 
 let probot: Awaited<ReturnType<typeof newProbot>>;

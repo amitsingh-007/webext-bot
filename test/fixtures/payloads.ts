@@ -35,9 +35,7 @@ export const pullRequestOpened = (branch = 'feature/awesome'): ReceiveEvent =>
     },
   }) as unknown as ReceiveEvent;
 
-export const pullRequestSynchronize = (
-  branch = 'feature/awesome'
-): ReceiveEvent =>
+export const pullRequestSynchronize = (branch = 'feature/awesome'): ReceiveEvent =>
   ({
     id: 'pr-sync',
     name: 'pull_request',

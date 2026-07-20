@@ -1,16 +1,7 @@
 import nock from 'nock';
 import { beforeEach, afterEach, describe, it, expect } from 'vitest';
-import {
-  newProbot,
-  GITHUB_API,
-  contentsPath,
-  configEnvelope,
-} from '../helpers';
-import {
-  workflowRunCompleted,
-  WORKFLOW_RUN_ID,
-  PR_NUMBER,
-} from '../fixtures/payloads';
+import { newProbot, GITHUB_API, contentsPath, configEnvelope } from '../helpers';
+import { workflowRunCompleted, WORKFLOW_RUN_ID, PR_NUMBER } from '../fixtures/payloads';
 
 let probot: Awaited<ReturnType<typeof newProbot>>;
 
@@ -39,16 +30,11 @@ const mockCreateCheck = (scope: nock.Scope) =>
 const mockArtifacts = (scope: nock.Scope, sizeInBytes?: number) =>
   scope.get(`${repo}/actions/runs/${WORKFLOW_RUN_ID}/artifacts`).reply(200, {
     total_count: sizeInBytes === undefined ? 0 : 1,
-    artifacts:
-      sizeInBytes === undefined
-        ? []
-        : [{ name: 'extension', size_in_bytes: sizeInBytes }],
+    artifacts: sizeInBytes === undefined ? [] : [{ name: 'extension', size_in_bytes: sizeInBytes }],
   });
 
 const mockLatestRelease = (scope: nock.Scope, size?: number) =>
-  scope
-    .get(`${repo}/releases/latest`)
-    .reply(200, { assets: size === undefined ? [] : [{ size }] });
+  scope.get(`${repo}/releases/latest`).reply(200, { assets: size === undefined ? [] : [{ size }] });
 
 describe('workflow_run.completed', () => {
   it('skips when the workflow name does not match config', async () => {
@@ -70,13 +56,10 @@ describe('workflow_run.completed', () => {
 
     let conclusion = '';
     scope
-      .patch(
-        `${repo}/check-runs/${CHECK_ID}`,
-        (body: { conclusion: string }) => {
-          conclusion = body.conclusion;
-          return true;
-        }
-      )
+      .patch(`${repo}/check-runs/${CHECK_ID}`, (body: { conclusion: string }) => {
+        conclusion = body.conclusion;
+        return true;
+      })
       .reply(200, {});
 
     await probot.receive(workflowRunCompleted({ conclusion: 'failure' }));
@@ -94,24 +77,18 @@ describe('workflow_run.completed', () => {
 
     let commentBody = '';
     scope
-      .post(
-        `${repo}/issues/${PR_NUMBER}/comments`,
-        (body: { body: string }) => {
-          commentBody = body.body;
-          return true;
-        }
-      )
+      .post(`${repo}/issues/${PR_NUMBER}/comments`, (body: { body: string }) => {
+        commentBody = body.body;
+        return true;
+      })
       .reply(201, {});
 
     let conclusion = '';
     scope
-      .patch(
-        `${repo}/check-runs/${CHECK_ID}`,
-        (body: { conclusion: string }) => {
-          conclusion = body.conclusion;
-          return true;
-        }
-      )
+      .patch(`${repo}/check-runs/${CHECK_ID}`, (body: { conclusion: string }) => {
+        conclusion = body.conclusion;
+        return true;
+      })
       .reply(200, {});
 
     await probot.receive(workflowRunCompleted());
@@ -127,9 +104,7 @@ describe('workflow_run.completed', () => {
     mockCreateCheck(scope);
     mockArtifacts(scope, 100_050);
     mockLatestRelease(scope, 100_000);
-    const updateMock = scope
-      .patch(`${repo}/check-runs/${CHECK_ID}`)
-      .reply(200, {});
+    const updateMock = scope.patch(`${repo}/check-runs/${CHECK_ID}`).reply(200, {});
 
     const commentMock = nock(GITHUB_API)
       .post(/\/comments$/)
@@ -179,9 +154,7 @@ describe('workflow_run.completed', () => {
     mockCreateCheck(scope);
     mockArtifacts(scope, 200_000);
     mockLatestRelease(scope, 100_000);
-    const updateMock = scope
-      .patch(`${repo}/check-runs/${CHECK_ID}`)
-      .reply(200, {});
+    const updateMock = scope.patch(`${repo}/check-runs/${CHECK_ID}`).reply(200, {});
 
     const commentMock = nock(GITHUB_API)
       .post(/\/comments$/)

@@ -1,12 +1,6 @@
 import nock from 'nock';
 import { beforeEach, afterEach, describe, it, expect } from 'vitest';
-import {
-  newProbot,
-  GITHUB_API,
-  contentsPath,
-  configEnvelope,
-  manifestEnvelope,
-} from '../helpers';
+import { newProbot, GITHUB_API, contentsPath, configEnvelope, manifestEnvelope } from '../helpers';
 import {
   pullRequestOpened,
   pullRequestSynchronize,
@@ -36,14 +30,8 @@ describe('pull_request.opened', () => {
     // `opened` fetches config twice (handler + processPullRequest).
     scope.get(configPath).query(true).twice().reply(200, configEnvelope());
     // Current (head) vs old (base) manifest, disambiguated by ref.
-    scope
-      .get(manifestPath)
-      .query({ ref: HEAD_SHA })
-      .reply(200, manifestEnvelope('1.1.0'));
-    scope
-      .get(manifestPath)
-      .query({ ref: BASE_SHA })
-      .reply(200, manifestEnvelope('1.0.0'));
+    scope.get(manifestPath).query({ ref: HEAD_SHA }).reply(200, manifestEnvelope('1.1.0'));
+    scope.get(manifestPath).query({ ref: BASE_SHA }).reply(200, manifestEnvelope('1.0.0'));
 
     let commentBody = '';
     scope
@@ -70,23 +58,15 @@ describe('pull_request.opened', () => {
     await probot.receive(pullRequestOpened());
 
     expect(nock.pendingMocks()).toStrictEqual([]);
-    expect(commentBody).toContain(
-      'Extension version is updated from `1.0.0` to `1.1.0`'
-    );
+    expect(commentBody).toContain('Extension version is updated from `1.0.0` to `1.1.0`');
     expect(assignees).toEqual(['reviewer1']);
   });
 
   it('posts the fail message for an invalid/downgraded version', async () => {
     const scope = nock(GITHUB_API);
     scope.get(configPath).query(true).twice().reply(200, configEnvelope());
-    scope
-      .get(manifestPath)
-      .query({ ref: HEAD_SHA })
-      .reply(200, manifestEnvelope('0.9.0'));
-    scope
-      .get(manifestPath)
-      .query({ ref: BASE_SHA })
-      .reply(200, manifestEnvelope('1.0.0'));
+    scope.get(manifestPath).query({ ref: HEAD_SHA }).reply(200, manifestEnvelope('0.9.0'));
+    scope.get(manifestPath).query({ ref: BASE_SHA }).reply(200, manifestEnvelope('1.0.0'));
 
     let commentBody = '';
     scope
@@ -98,16 +78,12 @@ describe('pull_request.opened', () => {
         }
       )
       .reply(201, {});
-    scope
-      .post(`/repos/amitsingh-007/webext-bot/issues/${PR_NUMBER}/assignees`)
-      .reply(201, {});
+    scope.post(`/repos/amitsingh-007/webext-bot/issues/${PR_NUMBER}/assignees`).reply(201, {});
 
     await probot.receive(pullRequestOpened());
 
     expect(nock.pendingMocks()).toStrictEqual([]);
-    expect(commentBody).toContain(
-      "New version can't be less than existing version"
-    );
+    expect(commentBody).toContain("New version can't be less than existing version");
   });
 
   it('does nothing on an ignored branch', async () => {
@@ -134,14 +110,8 @@ describe('pull_request.synchronize', () => {
     const scope = nock(GITHUB_API);
     // `synchronize` fetches config once (only inside processPullRequest).
     scope.get(configPath).query(true).once().reply(200, configEnvelope());
-    scope
-      .get(manifestPath)
-      .query({ ref: HEAD_SHA })
-      .reply(200, manifestEnvelope('1.2.0'));
-    scope
-      .get(manifestPath)
-      .query({ ref: BASE_SHA })
-      .reply(200, manifestEnvelope('1.1.0'));
+    scope.get(manifestPath).query({ ref: HEAD_SHA }).reply(200, manifestEnvelope('1.2.0'));
+    scope.get(manifestPath).query({ ref: BASE_SHA }).reply(200, manifestEnvelope('1.1.0'));
 
     let commentBody = '';
     scope
@@ -157,8 +127,6 @@ describe('pull_request.synchronize', () => {
     await probot.receive(pullRequestSynchronize());
 
     expect(nock.pendingMocks()).toStrictEqual([]);
-    expect(commentBody).toContain(
-      'Extension version is updated from `1.1.0` to `1.2.0`'
-    );
+    expect(commentBody).toContain('Extension version is updated from `1.1.0` to `1.2.0`');
   });
 });

@@ -1,6 +1,6 @@
 import { type Context } from 'probot';
 import semver from 'semver';
-import { fetchConfig, fetchFile, fetchManifest } from '../utils/fetch';
+import { fetchConfig, fetchManifest } from '../utils/fetch';
 import { isValidVersion, shouldIgnoreBranch } from '../utils/validate';
 import { commentOnPullRequest } from './commentService';
 

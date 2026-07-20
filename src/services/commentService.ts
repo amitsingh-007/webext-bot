@@ -27,9 +27,7 @@ export const commentOnPullRequests = async (
       .filter((number): number is number => number !== undefined);
 
     await Promise.all(
-      prNumbers.map(async (number) =>
-        commentOnPullRequest(context, message, number)
-      )
+      prNumbers.map(async (number) => commentOnPullRequest(context, message, number))
     );
   } catch (error: any) {
     context.log.info(error);

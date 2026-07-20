@@ -1,10 +1,7 @@
 import bytes, { type BytesOptions } from 'bytes';
 import json2md from 'json2md';
 
-json2md.converters.collapsible = (input: {
-  summary: string;
-  description: string;
-}) => `
+json2md.converters.collapsible = (input: { summary: string; description: string }) => `
 <details>
 <summary>${input.summary}</summary>
 </br>
@@ -30,9 +27,7 @@ export const getExtSizeChangeComment = async (
   return json2md([
     {
       collapsible: {
-        summary: `Extension Size Change: &nbsp ${formatBytes(
-          sizeDiff
-        )} ${getEmoji(sizeDiff)}`,
+        summary: `Extension Size Change: &nbsp ${formatBytes(sizeDiff)} ${getEmoji(sizeDiff)}`,
         description: json2md({
           table: {
             headers: ['', ''],
