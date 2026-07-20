@@ -76,7 +76,12 @@ describe('isValidVersion', () => {
     expect(isValidVersion('1.1.0', '1.0.0')).toBeFalsy();
   });
 
-  it('rejects an invalid semver string', () => {
+  it('rejects an invalid new version', () => {
     expect(isValidVersion('1.0.0', 'not-a-version')).toBeFalsy();
+  });
+
+  it('throws when the existing version is invalid semver', () => {
+    // Semver.gte rejects the invalid old version; the caller's try/catch handles it.
+    expect(() => isValidVersion('not-a-version', '1.0.0')).toThrow();
   });
 });
