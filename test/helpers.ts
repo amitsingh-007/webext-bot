@@ -32,7 +32,7 @@ export const defaultConfig: IConfig = {
   workflow: { name: 'Build', artifact: 'extension' },
 };
 
-// The base64 file envelope `getContent` returns and `extractFile` expects.
+// The base64 file envelope `getContent` returns; `extractFile` reads `type` + `content`.
 export const fileEnvelope = (content: string) => ({
   type: 'file' as const,
   content: Buffer.from(content).toString('base64'),

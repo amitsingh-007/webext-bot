@@ -15,7 +15,7 @@
   "type": "module",
   "scripts": {
     "dist": "pnpm build",
-    "build": "pnpm lint && pnpm typecheck && pnpm clean && pnpm build:bundle",
+    "build": "pnpm lint && pnpm typecheck && pnpm build:bundle",
     "lint": "oxfmt && oxlint",
     "typecheck": "tsc --noEmit",
     "build:bundle": "tsdown",
