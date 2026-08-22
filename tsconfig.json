@@ -6,7 +6,6 @@
     "types": ["node"],
     "moduleResolution": "bundler",
     "sourceMap": false,
-    "checkJs": true,
     "strict": true,
     "allowUnreachableCode": false,
     "noImplicitReturns": true,
