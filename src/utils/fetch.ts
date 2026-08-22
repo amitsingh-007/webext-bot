@@ -1,42 +1,19 @@
 import path from 'node:path';
 import { Buffer } from 'node:buffer';
-import { type ProbotOctokit, type Context } from 'probot';
+import { type Context } from 'probot';
 import YAML from 'yaml';
-import normalize from 'normalize-path';
 import { ConfigSchema, ManifestSchema, type IConfig } from '../constants/config';
-
-const extractFile = (
-  data: Awaited<ReturnType<ProbotOctokit['rest']['repos']['getContent']>>['data']
-) => {
-  if (!Array.isArray(data)) {
-    if (data.type !== 'file') {
-      return undefined;
-    }
-
-    return { content: data.content };
-  }
-
-  const file = data.find((item) => item.type === 'file');
-  if (!file) {
-    return undefined;
-  }
-
-  return { content: file.content ?? '' };
-};
 
 export const fetchFile = async (ctx: Context, filePath: string, ref?: string): Promise<unknown> => {
   try {
-    const params = ctx.repo({ path: filePath, ref });
-    const response = await ctx.octokit.rest.repos.getContent(params);
-
-    const file = extractFile(response.data);
-    if (!file) {
+    const { data } = await ctx.octokit.rest.repos.getContent(ctx.repo({ path: filePath, ref }));
+    // `getContent` only returns an array for a directory path; every caller passes a file.
+    if (Array.isArray(data) || data.type !== 'file') {
       return null;
     }
 
-    const decodedContent = Buffer.from(file.content, 'base64').toString();
-    return YAML.parse(decodedContent);
-  } catch (error: any) {
+    return YAML.parse(Buffer.from(data.content, 'base64').toString());
+  } catch (error) {
     ctx.log.info(error);
     return null;
   }
@@ -49,8 +26,7 @@ export const fetchConfig = async (context: Context, commitId?: string) => {
 
 export const fetchManifest = async (context: Context, config: IConfig, commitId?: string) => {
   const { manifest } = config;
-  const manifestFilePath = normalize(path.normalize(path.join(manifest.dir, manifest.name)));
-  const response = await fetchFile(context, manifestFilePath, commitId);
+  const response = await fetchFile(context, path.posix.join(manifest.dir, manifest.name), commitId);
   return ManifestSchema.parse(response);
 };
 
@@ -65,22 +41,14 @@ export const fetchCurrentArtifactSize = async (
     repo: repository.name,
     run_id: workflowRunId,
   });
-  const extension = data?.artifacts.find((artifact) => artifact.name === artifactName);
-  return extension?.size_in_bytes;
+  return data?.artifacts.find((artifact) => artifact.name === artifactName)?.size_in_bytes;
 };
 
 export const fetchLatestReleaseExtensionSize = async (ctx: Context<'workflow_run.completed'>) => {
   try {
-    const { octokit } = ctx;
-    const params = ctx.repo({});
-    const res = await octokit.rest.repos.getLatestRelease(params);
-    if (!res?.data?.assets) {
-      return null;
-    }
-
-    const [latestReleasedExtension] = res.data.assets;
-    return latestReleasedExtension ? latestReleasedExtension.size : null;
-  } catch (error: any) {
+    const res = await ctx.octokit.rest.repos.getLatestRelease(ctx.repo({}));
+    return res.data.assets[0]?.size ?? null;
+  } catch (error) {
     ctx.log.info(error);
     return null;
   }

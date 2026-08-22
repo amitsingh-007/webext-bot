@@ -14,9 +14,9 @@ const byteOptions: BytesOptions = {
   fixedDecimals: true,
   unitSeparator: ' ',
 };
-const formatBytes = (byte: number) => bytes(byte, byteOptions) ?? '';
+export const formatBytes = (byte: number) => bytes(byte, byteOptions) ?? '';
 
-export const getExtSizeChangeComment = async (
+export const getExtSizeChangeComment = (
   currentSize: number,
   latestReleaseSize: number,
   commitId: string

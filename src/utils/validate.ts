@@ -1,10 +1,10 @@
+import path from 'node:path';
 import { type components } from '@octokit/openapi-webhooks-types';
-import { minimatch } from 'minimatch';
 import semver from 'semver';
 import { type IConfig } from '../constants/config';
 
 export const shouldIgnoreBranch = (config: IConfig, branch: string | null): boolean =>
-  !branch || config['branches-ignore'].some((branchGlob) => minimatch(branch, branchGlob));
+  !branch || config['branches-ignore'].some((branchGlob) => path.matchesGlob(branch, branchGlob));
 
 type WorkflowRun = components['schemas']['webhook-workflow-run-completed'];
 

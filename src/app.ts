@@ -1,79 +1,70 @@
 import { type Probot } from 'probot';
 import { shouldSkipWorkflow, shouldIgnoreBranch } from './utils/validate';
 import { addChecksAndComment, addFailedCheck, createCheckRun } from './services/checkRunsService';
-import { addAssignees } from './services/issueService';
+import { addAssignees } from './utils/github';
 import { fetchConfig } from './utils/fetch';
 import { processPullRequest } from './services/pullRequestService';
 
 const probotApp = (app: Probot) => {
   app.log.info('App started.');
 
-  app.on('workflow_run.completed', async (context) => {
-    try {
-      const { workflow, workflow_run } = context.payload;
-      const { head_commit } = workflow_run;
-      const config = await fetchConfig(context, head_commit.id);
-      if (shouldSkipWorkflow(workflow, workflow_run, config)) {
-        return;
+  const on: Probot['on'] = (event, handler) =>
+    app.on(event, async (context) => {
+      try {
+        await handler(context);
+      } catch (error) {
+        context.log.error(error);
       }
+    });
 
-      const check = await createCheckRun(context, head_commit.id);
-      if (!check) return;
-      if (workflow_run.conclusion !== 'success') {
-        await addFailedCheck(context, check);
-        return;
-      }
-
-      await addChecksAndComment(context, {
-        headSha: head_commit.id,
-        check,
-        config,
-      });
-    } catch (error: any) {
-      app.log.info(error);
+  on('workflow_run.completed', async (context) => {
+    const { workflow, workflow_run } = context.payload;
+    const config = await fetchConfig(context, workflow_run.head_commit.id);
+    if (shouldSkipWorkflow(workflow, workflow_run, config)) {
+      return;
     }
+
+    const check = await createCheckRun(context);
+    if (workflow_run.conclusion !== 'success') {
+      await addFailedCheck(context, check);
+      return;
+    }
+
+    await addChecksAndComment(context, check, config);
   });
 
-  app.on('pull_request.synchronize', async (context) => {
-    try {
-      const { before, after, pull_request } = context.payload;
-      await processPullRequest(context, {
-        beforeSha: before,
-        afterSha: after,
-        prNumber: pull_request.number,
-        branch: pull_request.head.ref,
-      });
-    } catch (error: any) {
-      context.log.info(error);
+  on('pull_request.synchronize', async (context) => {
+    const { before, after, pull_request } = context.payload;
+    const config = await fetchConfig(context, after);
+    if (shouldIgnoreBranch(config, pull_request.head.ref)) {
+      return;
     }
+
+    await processPullRequest(context, config, {
+      beforeSha: before,
+      afterSha: after,
+      prNumber: pull_request.number,
+    });
   });
 
-  app.on('pull_request.opened', async (context) => {
-    try {
-      const { pull_request } = context.payload;
-      const { number, head, base } = pull_request;
-      const config = await fetchConfig(context, head.sha);
-      await processPullRequest(context, {
-        beforeSha: base.sha,
-        afterSha: head.sha,
-        prNumber: number,
-        branch: head.ref,
-      });
-      if (!shouldIgnoreBranch(config, head.ref)) {
-        await addAssignees(context, config, number);
-      }
-    } catch (error: any) {
-      context.log.info(error);
+  on('pull_request.opened', async (context) => {
+    const { number, head, base } = context.payload.pull_request;
+    const config = await fetchConfig(context, head.sha);
+    if (shouldIgnoreBranch(config, head.ref)) {
+      return;
     }
+
+    await processPullRequest(context, config, {
+      beforeSha: base.sha,
+      afterSha: head.sha,
+      prNumber: number,
+    });
+    await addAssignees(context, config, number);
   });
 
-  app.on('issues.opened', async (context) => {
-    try {
-      const config = await fetchConfig(context);
-      await addAssignees(context, config, context.payload.issue.number);
-    } catch (error: any) {
-      context.log.error(error);
-    }
+  on('issues.opened', async (context) => {
+    const config = await fetchConfig(context);
+    await addAssignees(context, config, context.payload.issue.number);
   });
 };
 

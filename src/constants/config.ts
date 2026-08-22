@@ -24,4 +24,3 @@ export type IConfig = z.infer<typeof ConfigSchema>;
 export const ManifestSchema = z.object({
   version: z.string(),
 });
-export type IManifest = z.infer<typeof ManifestSchema>;
