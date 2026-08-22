@@ -6,5 +6,5 @@
   "bracketSpacing": true,
   "endOfLine": "lf",
   "sortPackageJson": true,
-  "ignorePatterns": ["dist", "node_modules"]
+  "ignorePatterns": ["dist", "node_modules", ".github/workflows/pullfrog.yml"]
 }
