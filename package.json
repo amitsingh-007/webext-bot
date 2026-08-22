@@ -58,7 +58,7 @@
     "tsdown": "0.22.14",
     "typescript": "7.0.2",
     "vercel": "56.4.0",
-    "vitest": "3.2.7"
+    "vitest": "4.1.11"
   },
   "engines": {
     "node": ">= 24"
