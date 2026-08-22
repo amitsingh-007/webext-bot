@@ -13,7 +13,7 @@ export const fetchFile = async (ctx: Context, filePath: string, ref?: string): P
     }
 
     return YAML.parse(Buffer.from(data.content, 'base64').toString());
-  } catch (error: any) {
+  } catch (error) {
     ctx.log.info(error);
     return null;
   }
@@ -48,7 +48,7 @@ export const fetchLatestReleaseExtensionSize = async (ctx: Context<'workflow_run
   try {
     const res = await ctx.octokit.rest.repos.getLatestRelease(ctx.repo({}));
     return res.data.assets[0]?.size ?? null;
-  } catch (error: any) {
+  } catch (error) {
     ctx.log.info(error);
     return null;
   }

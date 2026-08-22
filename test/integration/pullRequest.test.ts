@@ -27,8 +27,7 @@ const manifestPath = contentsPath('manifest.json');
 describe('pull_request.opened', () => {
   it('comments on a version bump and adds assignees', async () => {
     const scope = nock(GITHUB_API);
-    // `opened` fetches config twice (handler + processPullRequest).
-    scope.get(configPath).query(true).twice().reply(200, configEnvelope());
+    scope.get(configPath).query(true).once().reply(200, configEnvelope());
     // Current (head) vs old (base) manifest, disambiguated by ref.
     scope.get(manifestPath).query({ ref: HEAD_SHA }).reply(200, manifestEnvelope('1.1.0'));
     scope.get(manifestPath).query({ ref: BASE_SHA }).reply(200, manifestEnvelope('1.0.0'));
@@ -64,7 +63,7 @@ describe('pull_request.opened', () => {
 
   it('posts the fail message for an invalid/downgraded version', async () => {
     const scope = nock(GITHUB_API);
-    scope.get(configPath).query(true).twice().reply(200, configEnvelope());
+    scope.get(configPath).query(true).once().reply(200, configEnvelope());
     scope.get(manifestPath).query({ ref: HEAD_SHA }).reply(200, manifestEnvelope('0.9.0'));
     scope.get(manifestPath).query({ ref: BASE_SHA }).reply(200, manifestEnvelope('1.0.0'));
 
@@ -88,7 +87,7 @@ describe('pull_request.opened', () => {
 
   it('does nothing on an ignored branch', async () => {
     const scope = nock(GITHUB_API);
-    scope.get(configPath).query(true).twice().reply(200, configEnvelope());
+    scope.get(configPath).query(true).once().reply(200, configEnvelope());
 
     // Must NOT be called on an ignored branch.
     const commentMock = nock(GITHUB_API)
@@ -108,7 +107,7 @@ describe('pull_request.opened', () => {
 describe('pull_request.synchronize', () => {
   it('comments on a version bump (single config fetch)', async () => {
     const scope = nock(GITHUB_API);
-    // `synchronize` fetches config once (only inside processPullRequest).
+    // Config is fetched once, in the handler, before the branch gate.
     scope.get(configPath).query(true).once().reply(200, configEnvelope());
     scope.get(manifestPath).query({ ref: HEAD_SHA }).reply(200, manifestEnvelope('1.2.0'));
     scope.get(manifestPath).query({ ref: BASE_SHA }).reply(200, manifestEnvelope('1.1.0'));

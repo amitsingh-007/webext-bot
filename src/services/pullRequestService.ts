@@ -1,8 +1,9 @@
 import { type Context } from 'probot';
 import semver from 'semver';
-import { fetchConfig, fetchManifest } from '../utils/fetch';
-import { isValidVersion, shouldIgnoreBranch } from '../utils/validate';
+import { fetchManifest } from '../utils/fetch';
+import { isValidVersion } from '../utils/validate';
 import { commentOnPullRequest } from '../utils/github';
+import { type IConfig } from '../constants/config';
 
 const failMessage = `
 Please check the extension version in the manifest.
@@ -11,21 +12,18 @@ Please check the extension version in the manifest.
 
 export const processPullRequest = async (
   context: Context<'pull_request'>,
+  config: IConfig,
   req: {
     afterSha: string;
     beforeSha: string;
     prNumber: number;
-    branch: string;
   }
 ) => {
-  const { afterSha, beforeSha, prNumber, branch } = req;
-  const config = await fetchConfig(context, afterSha);
-  if (shouldIgnoreBranch(config, branch)) {
-    return;
-  }
-
-  const currentManifest = await fetchManifest(context, config, afterSha);
-  const latestReleaseManifest = await fetchManifest(context, config, beforeSha);
+  const { afterSha, beforeSha, prNumber } = req;
+  const [currentManifest, latestReleaseManifest] = await Promise.all([
+    fetchManifest(context, config, afterSha),
+    fetchManifest(context, config, beforeSha),
+  ]);
   const oldVersion = latestReleaseManifest.version;
   const newVersion = currentManifest.version;
   if (!isValidVersion(oldVersion, newVersion)) {

@@ -12,55 +12,54 @@ const probotApp = (app: Probot) => {
     app.on(event, async (context) => {
       try {
         await handler(context);
-      } catch (error: any) {
+      } catch (error) {
         context.log.error(error);
       }
     });
 
   on('workflow_run.completed', async (context) => {
     const { workflow, workflow_run } = context.payload;
-    const { head_commit } = workflow_run;
-    const config = await fetchConfig(context, head_commit.id);
+    const config = await fetchConfig(context, workflow_run.head_commit.id);
     if (shouldSkipWorkflow(workflow, workflow_run, config)) {
       return;
     }
 
-    const check = await createCheckRun(context, head_commit.id);
-    if (!check) return;
+    const check = await createCheckRun(context);
     if (workflow_run.conclusion !== 'success') {
       await addFailedCheck(context, check);
       return;
     }
 
-    await addChecksAndComment(context, {
-      headSha: head_commit.id,
-      check,
-      config,
-    });
+    await addChecksAndComment(context, check, config);
   });
 
   on('pull_request.synchronize', async (context) => {
     const { before, after, pull_request } = context.payload;
-    await processPullRequest(context, {
+    const config = await fetchConfig(context, after);
+    if (shouldIgnoreBranch(config, pull_request.head.ref)) {
+      return;
+    }
+
+    await processPullRequest(context, config, {
       beforeSha: before,
       afterSha: after,
       prNumber: pull_request.number,
-      branch: pull_request.head.ref,
     });
   });
 
   on('pull_request.opened', async (context) => {
     const { number, head, base } = context.payload.pull_request;
     const config = await fetchConfig(context, head.sha);
-    await processPullRequest(context, {
+    if (shouldIgnoreBranch(config, head.ref)) {
+      return;
+    }
+
+    await processPullRequest(context, config, {
       beforeSha: base.sha,
       afterSha: head.sha,
       prNumber: number,
-      branch: head.ref,
     });
-    if (!shouldIgnoreBranch(config, head.ref)) {
-      await addAssignees(context, config, number);
-    }
+    await addAssignees(context, config, number);
   });
 
   on('issues.opened', async (context) => {

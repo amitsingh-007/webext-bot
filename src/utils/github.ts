@@ -10,7 +10,7 @@ export const commentOnPullRequest = async (
     await ctx.octokit.rest.issues.createComment(
       ctx.issue({ body: message, issue_number: prNumber })
     );
-  } catch (error: any) {
+  } catch (error) {
     ctx.log.info(error);
   }
 };
@@ -23,7 +23,7 @@ export const addAssignees = async (ctx: Context, config: IConfig, number: number
 
   try {
     await ctx.octokit.rest.issues.addAssignees(ctx.issue({ issue_number: number, assignees }));
-  } catch (error: any) {
+  } catch (error) {
     ctx.log.info(error);
   }
 };
