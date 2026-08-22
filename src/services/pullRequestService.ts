@@ -2,7 +2,7 @@ import { type Context } from 'probot';
 import semver from 'semver';
 import { fetchConfig, fetchManifest } from '../utils/fetch';
 import { isValidVersion, shouldIgnoreBranch } from '../utils/validate';
-import { commentOnPullRequest } from './commentService';
+import { commentOnPullRequest } from '../utils/github';
 
 const failMessage = `
 Please check the extension version in the manifest.

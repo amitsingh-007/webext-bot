@@ -1,19 +1,37 @@
 import bytes from 'bytes';
 import { type Context } from 'probot';
-import { CHECK_NAME } from '../constants';
-import { type ICheckOutput, type ICreateCheckOutput } from '../interfaces/github';
 import { getEmoji, getExtSizeChangeComment } from '../utils/message';
 import { fetchCurrentArtifactSize, fetchLatestReleaseExtensionSize } from '../utils/fetch';
+import { commentOnPullRequest } from '../utils/github';
 import { type IConfig } from '../constants/config';
-import { commentOnPullRequests } from './commentService';
+
+const CHECK_NAME = 'Web Ext';
+
+interface ICheckOutput {
+  title: string;
+  message: string;
+  conclusion: 'success' | 'failure';
+}
+
+export interface ICreateCheckOutput {
+  checkId: number;
+  detailsUrl: string | undefined;
+}
+
+const commentOnPullRequests = async (ctx: Context<'workflow_run.completed'>, message: string) => {
+  const { pull_requests: pullRequests } = ctx.payload.workflow_run;
+  const prNumbers = (pullRequests ?? []).flatMap((pullRequest) =>
+    pullRequest?.number === undefined ? [] : [pullRequest.number]
+  );
+  await Promise.all(prNumbers.map(async (number) => commentOnPullRequest(ctx, message, number)));
+};
 
 const updateCheck = async (
   ctx: Context<'workflow_run.completed'>,
   check: ICreateCheckOutput,
   checkOutput: ICheckOutput
 ) => {
-  const { payload } = ctx;
-  const { repository, workflow_run } = payload;
+  const { repository, workflow_run } = ctx.payload;
   try {
     await ctx.octokit.rest.checks.update({
       owner: repository.owner.login,
@@ -30,8 +48,8 @@ const updateCheck = async (
         summary: checkOutput.message,
       },
     });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    ctx.log.info(error);
   }
 };
 
@@ -59,7 +77,7 @@ export const addChecksAndComment = async (
 
   const actualSizeDiff = currentExtSize - latestReleaseExtSize;
   const absoluteSizeDiff = Math.abs(actualSizeDiff);
-  const message = await getExtSizeChangeComment(currentExtSize, latestReleaseExtSize, headSha);
+  const message = getExtSizeChangeComment(currentExtSize, latestReleaseExtSize, headSha);
   if (absoluteSizeDiff >= config['comment-threshold']) {
     await commentOnPullRequests(context, message);
   }
@@ -105,8 +123,8 @@ export const createCheckRun = async (
       checkId: response.data.id,
       detailsUrl: response.data.html_url ?? undefined,
     };
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    ctx.log.info(error);
     return undefined;
   }
 };
