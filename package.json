@@ -48,7 +48,7 @@
     "smee-client": "5.0.0",
     "tsdown": "0.22.14",
     "typescript": "7.0.2",
-    "vercel": "59.1.4",
+    "vercel": "59.10.0",
     "vitest": "4.1.11"
   },
   "engines": {
