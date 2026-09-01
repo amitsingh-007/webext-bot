@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@octokit/openapi-webhooks-types": "12.1.0",
-    "@types/bytes": "3.1.5",
+    "@types/bytes": "3.1.6",
     "@types/json2md": "1.5.4",
     "@types/node": "26.2.0",
     "@types/semver": "7.8.0",
